@@ -1,1 +1,1 @@
-# course_ChIPseq
+# ChIP-seq course materials
