@@ -3,9 +3,10 @@ layout: default
 title:  'Schedule'
 ---
 
-#### Click the heading of a topic to see the lecture slides or lab instructions. Note that slides, might be updated and altered as the course progresses.
+#### Click the heading of a topic to see the lecture slides or lab instructions. Note that we will be adding content here closer to the course.
 
 Course is held at SciLifeLab, Tomtebodavägen 23A, 17165 Solna
+Email (olga.dethlefsen@gmail.com) or call (0720 492 082) during the course
 
 ### Thursday 2017-10-23
 
@@ -23,7 +24,7 @@ Room: Gamma 6, Pascal
 
 **13.00 - 16.15** Practicals: ChIP-seq data processing continues (Olga, Verena)
 
-**16.15 - 17.00** Group discussion: ChIP-seq data processing (Olga, Verena)
+**16.15 - 17.00** Group discussion: ChIP-seq data processing (Olga, Verena, Jakub Westholm)
 
 
 ### Friday 2017-10-24
@@ -46,4 +47,4 @@ Room: Gamma 6, Pascal
 
 _coffee and snacks will arrive twice a day_
 
-_lunch will be at [Restaurang Königs](http://restaurangkonigs.se)_ 
+_lunch will be at [Restaurang Königs](http://restaurangkonigs.se)_
