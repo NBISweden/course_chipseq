@@ -105,7 +105,7 @@ web page [rstudio](https://www.rstudio.com/products/rstudio/download/)
 download the installer corresponding to your operative system. Unpack
 the installer and install the app on a suitable place on your system.
 
-## Test your environment
+## Test installations 
 
 If the installation above went without any problem you should be able
 to fire up R-studio and see something like the following:
@@ -116,7 +116,7 @@ thomas.kallman@nbis.se describing the error as well which operative operative
 system you are running.
 
 
-## Useful things to try before the course
+# Useful things to try before the course
 For those of you wanting to start ahead and/or brushing up on various skills before the course
 
 - [Unix](http://www.ee.surrey.ac.uk/Teaching/Unix/): especially the first three chapters. You can practice on Milou or using this [emulator](http://uppnex.se/emu/)
@@ -129,8 +129,7 @@ For those of you wanting to start ahead and/or brushing up on various skills bef
 - [ChIPpeakAnno tutorial](http://bioconductor.org/packages/release/bioc/vignettes/ChIPpeakAnno/inst/doc/pipeline.html): introduction to Biocondcutor package for downstream ChIP-seq data analyses that will be used during the course
 
 
-
-# Useful Non-R specific online resources
+# Useful online resources
 
 - [Bioinformatics StackExchange](https://bioinformatics.stackexchange.com)
   Online questions and answers resource in bioinformatics
