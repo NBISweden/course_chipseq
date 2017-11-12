@@ -6,7 +6,7 @@ title:  'Pre-course material'
 # Pre-course
 There are few things to do and think about before the course starts. Please read carefully and follow the instructions so we can all have a good start to the course. Contact course organisers in case anything in unclear.
 
-During the course we will be using Uppsala University's high performance computer (Uppmax) as well as run scripts locally on laptops using R and R-Studio. To be able to follow exercises we ask you to configure access to Uppmax and install both R and R-Studio on your laptop.
+During the course we will be using Uppsala University's high performance computer (Uppmax) as well as run scripts locally on laptops using R and R-Studio. To be able to follow exercises we ask you to configure access to Uppmax and install both R and R-Studio on your laptop. Also, having IGV (Integrative Genomics Viewer) installed will come handy during the course.
 
 # Uppmax
 The computational resources are provided by SNIC_UPPMAX. To be able to use them
@@ -40,8 +40,8 @@ A guide explaining logging procedure can be found on [Uppmax website](http://www
 
 # R & R-Studio
 
-For the course we will use the latest version of R and R-studio. Both
-of these works on computers running Linux, Windows and Macintosh
+For the course we will also use the latest version of R and R-studio locally. Both
+of these work on computers running Linux, Windows and Macintosh
 operative systems. R-studio is a set of tools as well as an editor
 that facilitates the use of R and in many ways create a superior
 environment to integrate directly with R. Over the last years it has
@@ -105,7 +105,7 @@ web page [rstudio](https://www.rstudio.com/products/rstudio/download/)
 download the installer corresponding to your operative system. Unpack
 the installer and install the app on a suitable place on your system.
 
-## Test installations 
+## Test installations
 
 If the installation above went without any problem you should be able
 to fire up R-studio and see something like the following:
@@ -115,9 +115,12 @@ If you do not see a screen like this one please send an email to
 thomas.kallman@nbis.se describing the error as well which operative operative
 system you are running.
 
+# IGV
+To install, follow the instructions on the [IGV website](http://software.broadinstitute.org/software/igv/)
+
 
 # Useful things to try before the course
-For those of you wanting to start ahead and/or brushing up on various skills before the course
+For those of you wanting to start ahead and/or brush up on various skills before the course
 
 - [Unix](http://www.ee.surrey.ac.uk/Teaching/Unix/): especially the first three chapters. You can practice on Milou or using this [emulator](http://uppnex.se/emu/)
 - [Best first R tutorial](https://www.nceas.ucsb.edu/files/scicomp/Dloads/RProgramming/BestFirstRTutorial.pdf)  
