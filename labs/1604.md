@@ -29,7 +29,7 @@ The reads were mapped to the human genome assembly version hg19.
 | 4  | ENCSR000BTV |  neural   | in vitro differentiated (Homo sapiens, embryonic male) |
 
 Table 1. ENCODE accession numbers for data sets used in this class.
- 
+
 
 In the interest of time, all steps are performed using a scaled down data set (containing reads mapped to chromosomes 1 and 2). However, for the post peak-calling QC and differential occupancy, the peaks on chromosomes 1 and 2 are selected from the peaks called using the full data set.
 
@@ -49,9 +49,9 @@ The typical workflow in a ChIP-seq experiment (after an initial quality control,
 
 1. Post-alignment quality control (QC) to assess successful enrichment in ChIP by computing cross-correlation profile and associated metrics; the tool of choice is phantompeakqualtools (part 1 of this class).
 
-2. Processing of bam files to remove alignments of reads which 
-(i) are duplicates and 
-(ii) map to blacklisted regions ("hyper-chippable" regions). 
+2. Processing of bam files to remove alignments of reads which
+(i) are duplicates and
+(ii) map to blacklisted regions ("hyper-chippable" regions).
 These reads may result from experimental artefacts and their presence may bias downstream analyses.
 Additionally, in  this step you will compute normalised coverage tracks; these will be later viewed in a genome browser
 (part 1 of this class).
@@ -64,7 +64,7 @@ Additionally, in  this step you will compute normalised coverage tracks; these w
 (part 2 of this class)
 
 
-5. Signal visualisation in a genome browser. The read alignments, normalised coverage tracks and binding sites are visualised for general signal assessment (part 2 of this class). 
+5. Signal visualisation in a genome browser. The read alignments, normalised coverage tracks and binding sites are visualised for general signal assessment (part 2 of this class).
 Integrative genome browser [IGV](https://www.broadinstitute.org/igv/) is an easy to use tool compatible with all operating systems - please install it in your local computer if you haven't done so already.
 
 6. Additional exercises (part 3 of this class):
@@ -103,7 +103,7 @@ To see all options for applications used throughout the class, you can type `com
 
 You will notice that you will load and unload modules practically before and after each command; this is done because there are often dependency conflicts between the modules used in this exercise, and if not unloaded, some modules will cause error messages from the module system on milou.
 
-To save time and minimise issues with data access, you will use bash scripts which will set up data and environment for this exercise. 
+To save time and minimise issues with data access, you will use bash scripts which will set up data and environment for this exercise.
 
 * `chiseq_data.sh` this script sets up directory structure and creates symbolic links to data or copies smaller files; needs to be sourced only once, before the exercise is started;
 * `chipseq_env.sh` this script sets several environmental variables you will use in the exercise; it needs to be sourced every time you open a new connection to milou (i.e. after you accidentally log out or the connection times out).
@@ -151,7 +151,7 @@ module unload phantompeakqualtools/1.1
 
 This step takes a few minutes, and phantompeakqualtools prints messages as it progresses through different stages of the analysis.
 
-Inspect the resulting file `xcor_metrics_hela.txt`. 
+Inspect the resulting file `xcor_metrics_hela.txt`.
 
 The metrics file is tabulated, and the fields are:
 
@@ -161,8 +161,8 @@ COL1: Filename
 COL2: numReads: effective sequencing depth i.e. total number of mapped reads
  in input file
 
-COL3: estFragLen: comma separated strand cross-correlation peak(s) in decreasing 
- order of correlation. In almost all cases, the top (first) value in the list 
+COL3: estFragLen: comma separated strand cross-correlation peak(s) in decreasing
+ order of correlation. In almost all cases, the top (first) value in the list
  represents the predominant fragment length.
 
 COL4: corr_estFragLen: comma separated strand (Pearson) cross-correlation value(s)
@@ -178,10 +178,10 @@ COL8: min_corr: minimum value of cross-correlation
 
 COL9: Normalized strand cross-correlation coefficient (NSC) = COL4 / COL8
 
-COL10: Relative strand cross-correlation coefficient 
+COL10: Relative strand cross-correlation coefficient
  (RSC) = (COL4 - COL8) / (COL6 - COL8)
 
-COL11: QualityTag: Quality tag based on thresholded RSC 
+COL11: QualityTag: Quality tag based on thresholded RSC
   (codes: -2:veryLow; -1:Low; 0:Medium; 1:High; 2:veryHigh)
 ```
 
@@ -206,7 +206,7 @@ cat ../../results/xcor/rest.xcor_metrics.txt
 
 In addition to inspecting the metrics file, it is always recommended to view the plots, as the shape of the cross correlation is in some cases more informative than just numbers.
 
-Compare the plot `hela1_xcor.pdf` (cross correlation of the first replicate of REST ChIP in HeLa cells, using subset data) with cross correlation computed using the non-subset data set presented on figures 1 - 3. Compare to the ChIP using the same antibody performed in HepG2 cells (figures 4 - 6). 
+Compare the plot `hela1_xcor.pdf` (cross correlation of the first replicate of REST ChIP in HeLa cells, using subset data) with cross correlation computed using the non-subset data set presented on figures 1 - 3. Compare to the ChIP using the same antibody performed in HepG2 cells (figures 4 - 6).
 
 If you have enabled X-forwarding on your local computer, this command opens pdf files directly on the server:
 
@@ -225,7 +225,7 @@ scp <LOGIN>@milou.uppmax.uu.se:~/chipseq/analysis/<FOLDER_NAME>/*pdf ./
 
 |Figure 1. <br> HeLa, REST ChIP  <br>  replicate 1, QScore:2 | Figure 2. <br> HeLa, REST ChIP <br> replicate 2, QScore:2  | Figure 3. <br> HeLa, input <br> QScore:-1                                         |
 | --- | ----------- | --------- |
-|<img src="files/chipseq_fig/ENCFF000PEDxcorrelationplot.png" alt="xcor, hela chip" style="width: 200px;"/>| <img src="files/chipseq_fig/ENCFF000PEExcorrelationplot.png" alt="xcor, hela chip" style="width: 200px;"/>| <img src="files/chipseq_fig/ENCFF000PETxcorrelationplot.png" alt="xcor, hela input" style="width: 200px;"/>|
+|<img src="../figures/1604/ENCFF000PEDxcorrelationplot.png" alt="xcor, hela chip" style="width: 200px;"/>| <img src="../figures/1604/ENCFF000PEExcorrelationplot.png" alt="xcor, hela chip" style="width: 200px;"/>| <img src="../figures/1604/ENCFF000PETxcorrelationplot.png" alt="xcor, hela input" style="width: 200px;"/>|
 
 
 ----
@@ -233,7 +233,7 @@ scp <LOGIN>@milou.uppmax.uu.se:~/chipseq/analysis/<FOLDER_NAME>/*pdf ./
 
 |Figure 4. <br> HepG2, REST ChIP  <br>  replicate 1, QScore:0 | Figure 5. <br> HepG2, REST ChIP <br> replicate 2, QScore:1  | Figure 6. <br> HepG2, input <br> QScore:0                                        |
 | --- | ----------- | --------- |
-|<img src="files/chipseq_fig/ENCFF000PMGppqtxcorrelationplot.png" alt="xcor, hepg2 chip" style="width: 200px;"/>| <img src="files/chipseq_fig/ENCFF000PMJppqtxcorrelationplot.png" alt="xcor, hepg2 chip" style="width: 200px;"/>| <img src="files/chipseq_fig/ENCFF000POMppqtxcorrelationplot.png" alt="xcor, hepg2 input" style="width: 200px;"/>|
+|<img src="../figures/1604/ENCFF000PMGppqtxcorrelationplot.png" alt="xcor, hepg2 chip" style="width: 200px;"/>| <img src="../figures/1604/ENCFF000PMJppqtxcorrelationplot.png" alt="xcor, hepg2 chip" style="width: 200px;"/>| <img src="../figures/1604/ENCFF000POMppqtxcorrelationplot.png" alt="xcor, hepg2 input" style="width: 200px;"/>|
 
 -----
 
@@ -247,7 +247,7 @@ How would you rate these particular two data sets? Are all samples of good enoug
 
 ### Alignment Processing
 
-This section is performed using data subset to chromosomes 1 and 2. First, duplicated reads are marked and removed using MarkDuplicates tool from Picard. Marking as "duplicates" is based on their alignment location, not sequence. 
+This section is performed using data subset to chromosomes 1 and 2. First, duplicated reads are marked and removed using MarkDuplicates tool from Picard. Marking as "duplicates" is based on their alignment location, not sequence.
 
 ```bash
 cd ..
@@ -386,7 +386,7 @@ cp ../../results/peaks_bed/*.bed ./
 ```
 
 
-By checking for overlaps in the peak lists from different libraries you can detect peaks present in both libraries. This will give you an idea which peaks are reproducible between replicates. 
+By checking for overlaps in the peak lists from different libraries you can detect peaks present in both libraries. This will give you an idea which peaks are reproducible between replicates.
 [Bedtools](http://bedtools.readthedocs.org/en/latest/) is a suite of utilities developed for manipulation of bed files.
 
 In the command used here, the arguments are
@@ -438,7 +438,7 @@ neural_1_peaks.chr12.bed neural_2_peaks.chr12.bed sknsh_1_peaks.chr12.bed sknsh_
 
 module unload BEDOPS/2.4.3
 
-wc -l REST_peaks.chr12.bed 
+wc -l REST_peaks.chr12.bed
 ```
 
 In case things go wrong at this stage, you can find the merged list of all peaks in the `/results` directory. Link the file to your current directory
@@ -487,7 +487,7 @@ sknsh/ENCFF000RBT.chr12.rmdup.sort.bam sknsh/ENCFF000RBU.chr12.rmdup.sort.bam \
 --outFileName multiBamArray_bed_bam_chr12.npz \
 --extendReads=110 \
 --labels hela_1 hela_2 hela_i hepg2_1 hepg2_2 hepg2_i1 hepg2_i2 neural_1 \
-neural_2 neural_i1 neural_i2 sknsh_1 sknsh_2 sknsh_i1 sknsh_i2 
+neural_2 neural_i1 neural_i2 sknsh_1 sknsh_2 sknsh_i1 sknsh_i2
 
 plotCorrelation --corData multiBamArray_bed_bam_chr12.npz \
 --plotFile correlation_peaks.pdf --outFileCorMatrix correlation_peaks_matrix.txt \
@@ -496,7 +496,7 @@ plotCorrelation --corData multiBamArray_bed_bam_chr12.npz \
 module unload deepTools/2.0.1
 ```
 
-In the pattern of library clustering consistent with biological differences between the samples and the cell lines? 
+In the pattern of library clustering consistent with biological differences between the samples and the cell lines?
 
 [//]: #
 [//]: # (IGV)
@@ -514,7 +514,7 @@ REST ChIP in HeLa cells, replicate 1 (the files you created so far, or):
 
 ../results/coverage/ENCFF000PED.cov.norm1x.bedgraph
 
-../results/peaks_macs/hela_1_REST.chr12.macs2_peaks.narrowPeak 
+../results/peaks_macs/hela_1_REST.chr12.macs2_peaks.narrowPeak
 ```
 
 input in HeLa cells:
@@ -547,7 +547,7 @@ The parts using R can be performed either by executing the scripts provided with
 
 There are examples of two more QC plots generated using deepTools which allow you to inspect enrichment in the libraries (cumulative enrichment aka bamFingerprint) and assess overall signal similarities between libraries (correlation plot in the "bin" mode).
 
-Finally, you can visualise the distribution of the ChIP signal in relation to genomic features using deepTools. 
+Finally, you can visualise the distribution of the ChIP signal in relation to genomic features using deepTools.
 
 
 ### Quality Control: cumulative enrichment
@@ -567,13 +567,13 @@ plotFingerprint --bamfiles ENCFF000PED.chr12.rmdup.filt.sort.bam \
 module unload deepTools/2.0.1
 ```
 
-Inspect the plot; does it indicate good sample quality (i.e. enrichment in ChIP samples and no indications of enrichment in input samples)? 
+Inspect the plot; does it indicate good sample quality (i.e. enrichment in ChIP samples and no indications of enrichment in input samples)?
 For comparison, similar plots generated for other samples used in this exercise are presented in figures 7 and 8.
 
 
 |Figure 7. <br> Cumulative enrichment for REST ChIP and corresponding inputs    <br> in HepG2 cells | Figure 8. <br> Cumulative enrichment for REST ChIP and corresponding inputs    <br> in SK-N-SH cells |
 | --- | ----------- |
-|<img src="files/chipseq_fig/hepg2fingerprint.png" alt="fingerprint, hepg2" style="width: 280px;"/>| <img src="files/chipseq_fig/sknshfingerprint.png" alt="fingerprint, sknsh" style="width: 280px;"/>|
+|<img src="../figures/1604/hepg2fingerprint.png" alt="fingerprint, hepg2" style="width: 280px;"/>| <img src="../figures/1604/sknshfingerprint.png" alt="fingerprint, sknsh" style="width: 280px;"/>|
 
 Can you tell which samples are ChIP and which are input? Are the cumulative enrichment plots in agreement with the cross-correlation metrics computed earlier?
 
@@ -611,7 +611,7 @@ sknsh/ENCFF000RAG.chr12.rmdup.sort.bam sknsh/ENCFF000RAH.chr12.rmdup.sort.bam \
 sknsh/ENCFF000RBT.chr12.rmdup.sort.bam sknsh/ENCFF000RBU.chr12.rmdup.sort.bam \
  --outFileName multiBamArray_dT201_preproc_bam_chr12.npz --binSize=5000 \
 --extendReads=110 --labels hela_1 hela_2 hela_i hepg2_1 hepg2_2 hepg2_i1 hepg2_i2 \
-neural_1 neural_2 neural_i1 neural_i2 sknsh_1 sknsh_2 sknsh_i1 sknsh_i2 
+neural_1 neural_2 neural_i1 neural_i2 sknsh_1 sknsh_2 sknsh_i1 sknsh_i2
 
 plotCorrelation --corData multiBamArray_dT201_preproc_bam_chr12.npz \
 --plotFile REST_bam_correlation_bin.pdf --outFileCorMatrix corr_matrix_bin.txt \
@@ -739,28 +739,28 @@ Table 2. ENCODE accession numbers for samples used in this exercise.
 
 ### Figures generated during class
 
-<img src="files/chipseq_fig/resENCFF000PEDchr12xcor.png" alt="" style="width: 400px;"/><br>
+<img src="../figures/1604/resENCFF000PEDchr12xcor.png" alt="" style="width: 400px;"/><br>
 
 Figure 9. Cross correlation plot for REST ChIP in Hela cells, replicate 1, chromosome 1 and 2
 
 
 ----
 
-<img src="files/chipseq_fig/peaksbedchr12pears.png" alt="" style="width: 400px;"/><br>
+<img src="../figures/1604/peaksbedchr12pears.png" alt="" style="width: 400px;"/><br>
 
 Figure 10. Sample clustering (pearson) by reads mapped in merged peaks; only chromosomes 1 and 2 included
 
 
 ----
 
-<img src="files/chipseq_fig/resHelaChr12Fingerprint.png" alt="" style="width: 400px;"/><br>
+<img src="../figures/1604/resHelaChr12Fingerprint.png" alt="" style="width: 400px;"/><br>
 
 Figure 11. Fingerprint plot for REST ChIP in Hela cells, replicate 1, chromosome 1 and 2
 
 
 ----
 
-<img src="files/chipseq_fig/bin5kchr12spear.png" alt="" style="width: 400px;"/><br>
+<img src="../figures/1604/bin5kchr12spear.png" alt="" style="width: 400px;"/><br>
 
 
 Figure 12. Sample clustering (spearman) by reads mapped in bins genome-wide; only chromosomes 1 and 2 included
@@ -768,7 +768,7 @@ Figure 12. Sample clustering (spearman) by reads mapped in bins genome-wide; onl
 
 ----
 
-<img src="files/chipseq_fig/resHelaProfileTSS.png" alt="" style="height: 400px;"/><br>
+<img src="../figures/1604/resHelaProfileTSS.png" alt="" style="height: 400px;"/><br>
 
 Figure 13. Binding profile in HeLa replicate 1, centered on TSS; data subset to chromosome 1 and 2
 
@@ -778,27 +778,23 @@ Figure 13. Binding profile in HeLa replicate 1, centered on TSS; data subset to 
 ### Figures generated using the full (i.e. not subset) data set
 
 
-<img src="files/chipseq_fig/helaprocfingerprint.png" alt="" style="width: 400px;"/><br>
+<img src="../figures/1604/helaprocfingerprint.png" alt="" style="width: 400px;"/><br>
 
 Figure 14. Cumulative enrichment in  HeLa replicate 1, aka bam fingerprint
 
 
 ----
 
-<img src="files/chipseq_fig/bin5kspear.png" alt="" style="width: 400px;"/><br>
+<img src="../figures/1604/bin5kspear.png" alt="" style="width: 400px;"/><br>
 
 Figure 15. Sample clustering (spearman) by reads mapped in bins genome-wide
 
 
 ----
 
-<img src="files/chipseq_fig/peaksbedpears.png" alt="" style="width: 400px;"/><br>
+<img src="../figures/1604/peaksbedpears.png" alt="" style="width: 400px;"/><br>
 
 Figure 16. Sample clustering (pearson) by reads mapped in merged peaks
 
 
 ----
-
-
-
-
