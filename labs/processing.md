@@ -225,7 +225,7 @@ scp <LOGIN>@milou.uppmax.uu.se:~/chipseq/analysis/<FOLDER_NAME>/*pdf ./
 
 |Figure 1. <br> HeLa, REST ChIP  <br>  replicate 1, QScore:2 | Figure 2. <br> HeLa, REST ChIP <br> replicate 2, QScore:2  | Figure 3. <br> HeLa, input <br> QScore:-1                                         |
 | --- | ----------- | --------- |
-|<img src="../figures/processing/ENCFF000PEDxcorrelationplot.png" alt="xcor, hela chip" style="width: 200px;"/>| <img src="../figures/processing/ENCFF000PEExcorrelationplot.png" alt="xcor, hela chip" style="width: 200px;"/>| <img src="../figures/processing/ENCFF000PETxcorrelationplot.png" alt="xcor, hela input" style="width: 200px;"/>|
+|<img src="../figures/lab-processing/ENCFF000PEDxcorrelationplot.png" alt="xcor, hela chip" style="width: 200px;"/>| <img src="../figures/lab-processing/ENCFF000PEExcorrelationplot.png" alt="xcor, hela chip" style="width: 200px;"/>| <img src="../figures/lab-processing/ENCFF000PETxcorrelationplot.png" alt="xcor, hela input" style="width: 200px;"/>|
 
 
 ----
@@ -233,7 +233,7 @@ scp <LOGIN>@milou.uppmax.uu.se:~/chipseq/analysis/<FOLDER_NAME>/*pdf ./
 
 |Figure 4. <br> HepG2, REST ChIP  <br>  replicate 1, QScore:0 | Figure 5. <br> HepG2, REST ChIP <br> replicate 2, QScore:1  | Figure 6. <br> HepG2, input <br> QScore:0                                        |
 | --- | ----------- | --------- |
-|<img src="../figures/processing/ENCFF000PMGppqtxcorrelationplot.png" alt="xcor, hepg2 chip" style="width: 200px;"/>| <img src="../figures/processing/ENCFF000PMJppqtxcorrelationplot.png" alt="xcor, hepg2 chip" style="width: 200px;"/>| <img src="../figures/processing/ENCFF000POMppqtxcorrelationplot.png" alt="xcor, hepg2 input" style="width: 200px;"/>|
+|<img src="../figures/lab-processing/ENCFF000PMGppqtxcorrelationplot.png" alt="xcor, hepg2 chip" style="width: 200px;"/>| <img src="../figures/lab-processing/ENCFF000PMJppqtxcorrelationplot.png" alt="xcor, hepg2 chip" style="width: 200px;"/>| <img src="../figures/lab-processing/ENCFF000POMppqtxcorrelationplot.png" alt="xcor, hepg2 input" style="width: 200px;"/>|
 
 -----
 
@@ -573,7 +573,7 @@ For comparison, similar plots generated for other samples used in this exercise 
 
 |Figure 7. <br> Cumulative enrichment for REST ChIP and corresponding inputs    <br> in HepG2 cells | Figure 8. <br> Cumulative enrichment for REST ChIP and corresponding inputs    <br> in SK-N-SH cells |
 | --- | ----------- |
-|<img src="../figures/processing/hepg2fingerprint.png" alt="fingerprint, hepg2" style="width: 280px;"/>| <img src="../figures/processing/sknshfingerprint.png" alt="fingerprint, sknsh" style="width: 280px;"/>|
+|<img src="../figures/lab-processing/hepg2fingerprint.png" alt="fingerprint, hepg2" style="width: 280px;"/>| <img src="../figures/lab-processing/sknshfingerprint.png" alt="fingerprint, sknsh" style="width: 280px;"/>|
 
 Can you tell which samples are ChIP and which are input? Are the cumulative enrichment plots in agreement with the cross-correlation metrics computed earlier?
 
@@ -739,28 +739,28 @@ Table 2. ENCODE accession numbers for samples used in this exercise.
 
 ### Figures generated during class
 
-<img src="../figures/processing/resENCFF000PEDchr12xcor.png" alt="" style="width: 400px;"/><br>
+<img src="../figures/lab-processing/resENCFF000PEDchr12xcor.png" alt="" style="width: 400px;"/><br>
 
 Figure 9. Cross correlation plot for REST ChIP in Hela cells, replicate 1, chromosome 1 and 2
 
 
 ----
 
-<img src="../figures/processing/peaksbedchr12pears.png" alt="" style="width: 400px;"/><br>
+<img src="../figures/lab-processing/peaksbedchr12pears.png" alt="" style="width: 400px;"/><br>
 
 Figure 10. Sample clustering (pearson) by reads mapped in merged peaks; only chromosomes 1 and 2 included
 
 
 ----
 
-<img src="../figures/processing/resHelaChr12Fingerprint.png" alt="" style="width: 400px;"/><br>
+<img src="../figures/lab-processing/resHelaChr12Fingerprint.png" alt="" style="width: 400px;"/><br>
 
 Figure 11. Fingerprint plot for REST ChIP in Hela cells, replicate 1, chromosome 1 and 2
 
 
 ----
 
-<img src="../figures/processing/bin5kchr12spear.png" alt="" style="width: 400px;"/><br>
+<img src="../figures/lab-processing/bin5kchr12spear.png" alt="" style="width: 400px;"/><br>
 
 
 Figure 12. Sample clustering (spearman) by reads mapped in bins genome-wide; only chromosomes 1 and 2 included
@@ -768,7 +768,7 @@ Figure 12. Sample clustering (spearman) by reads mapped in bins genome-wide; onl
 
 ----
 
-<img src="../figures/processing/resHelaProfileTSS.png" alt="" style="height: 400px;"/><br>
+<img src="../figures/lab-processing/resHelaProfileTSS.png" alt="" style="height: 400px;"/><br>
 
 Figure 13. Binding profile in HeLa replicate 1, centered on TSS; data subset to chromosome 1 and 2
 
@@ -778,21 +778,21 @@ Figure 13. Binding profile in HeLa replicate 1, centered on TSS; data subset to 
 ### Figures generated using the full (i.e. not subset) data set
 
 
-<img src="../figures/processing/helaprocfingerprint.png" alt="" style="width: 400px;"/><br>
+<img src="../figures/lab-processing/helaprocfingerprint.png" alt="" style="width: 400px;"/><br>
 
 Figure 14. Cumulative enrichment in  HeLa replicate 1, aka bam fingerprint
 
 
 ----
 
-<img src="../figures/processing/bin5kspear.png" alt="" style="width: 400px;"/><br>
+<img src="../figures/lab-processing/bin5kspear.png" alt="" style="width: 400px;"/><br>
 
 Figure 15. Sample clustering (spearman) by reads mapped in bins genome-wide
 
 
 ----
 
-<img src="../figures/processing/peaksbedpears.png" alt="" style="width: 400px;"/><br>
+<img src="../figures/lab-processing/peaksbedpears.png" alt="" style="width: 400px;"/><br>
 
 Figure 16. Sample clustering (pearson) by reads mapped in merged peaks
 
