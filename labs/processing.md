@@ -3,7 +3,7 @@ layout: default
 title:  'ChIP-seq data processing tutorial'
 ---
 
-# ChIP-seq data processing and analysis tutorial 
+# ChIP-seq data processing tutorial 
 
 ## Introduction <a name="Introduction"></a>
 
