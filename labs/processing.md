@@ -1,15 +1,15 @@
 ---
 layout: default
-title:  'Instructions for the ChIP-seq Data Analysis Class'
+title:  'ChIP-seq data processing'
 ---
 
-# Instructions for the ChIP-seq Data Analysis Class
+# ChIP-seq data processing
 
 ## Introduction
 
-REST (NRSF) is a transcriptional repressor that represses neuronal genes in non-neuronal tissues. It is a member of the Kruppel-type zinc finger transcription factor family. It represses transcription by binding a DNA sequence element called the neuron-restrictive silencer element (NRSE). The protein is also found in undifferentiated neuronal progenitor cells and it is thought that this repressor may act as a master negative regular of neurogenesis. In addition, REST has been implicated as tumour suppressor, as the function of REST is lost in breast, colon and small cell lung cancers.
+REST (NRSF) is a transcriptional repressor that represses neuronal genes in non-neuronal cells. It is a member of the Kruppel-type zinc finger transcription factor family. It represses transcription by binding a DNA sequence element called the neuron-restrictive silencer element (NRSE). The protein is also found in undifferentiated neuronal progenitor cells and it is thought that this repressor may act as a master negative regulator of neurogenesis. In addition, REST has been implicated as tumour suppressor, as the function of REST is lost in breast, colon and small cell lung cancers.
 
-ChIP sequencing (ChIP-seq) is a method of identifying genome-wide occupancy patterns of proteins of interest (transcription factors, chromatin binding proteins, histones, DNA / RNA polymerases, etc.). A pressing question in ChIP-seq experiments is “Did my ChIP work?”, i.e. did the antibody-treatment enrich sufficiently so that the ChIP signal can be separated from the background signal? (After all, around 90% of all DNA fragments in a ChIP experiment represent the genomic background). This question is impossible to answer by counting number of peaks or by visual inspection of mapped reads in a genome browser; however, several quality control methods have been developed to address this task, as will be demonstrated in the first part of this lab. The second part of the lab deals with identification of binding sites and signal visualisation. The third part is a collection of bonus exercises which expand on techniques used in parts 1 and 2, as well as an example workflow for peak annotation and differential occupancy. You can select one or more (or all) of these additional exercises. Combined they present a complete workflow for detection of binding sites in ChIP-seq experiments.
+ChIP sequencing (ChIP-seq) is a method of identifying genome-wide occupancy patterns of proteins of interest (transcription factors, chromatin binding proteins, histones, DNA / RNA polymerases, etc.). A pressing question in ChIP-seq experiments is “Did my ChIP work?”, i.e. did the antibody-treatment enrich sufficiently so that the ChIP signal can be separated from the background signal? After all, around 90% of all DNA fragments in a ChIP experiment represent the genomic background. This question is impossible to answer by counting number of peaks or by visual inspection of mapped reads in a genome browser; however, several quality control methods have been developed to address this task, as will be demonstrated in the first part of this lab. The second part of the lab deals with identification of binding sites and signal visualisation. The third part is a collection of bonus exercises which expand on techniques used in parts 1 and 2, as well as an example workflow for peak annotation and differential occupancy. You can select one or more (or all) of these additional exercises. Combined they present a complete workflow for detection of binding sites in ChIP-seq experiments.
 
 
 ## Data and Methods

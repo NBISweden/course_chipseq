@@ -14,11 +14,11 @@ Room: Gamma 6, Pascal
 
 **08.45 - 9.00** pre-course coffee
 
-**09:00 - 09.30** Welcome, incl. getting to know each other
+**09:00 - 09.30** [Welcome, incl. getting to know each other](lectures/welcome.pdf) (Olga Dethlefsen, Agata Smialowska)
 
-**09.30 - 10.30** Lecture: ChIP-seq data analysis principles (Agata Smialowska)
+**09.30 - 10.30** Lecture: ChIP-seq data analysis principles (Agata)
 
-**10.30 - 12.00** Practicals: ChIP-seq data processing (Olga Dethlefsen, Verena Kutschera)
+**10.30 - 12.00** Practicals: ChIP-seq data processing (Olga, Verena Kutschera)
 
 **12.00 - 13.00** _lunch_
 

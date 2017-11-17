@@ -11,11 +11,13 @@ title:  'ChIP-seq data analysis, 1 hp - November 2017'
 ## Important Links
 [Pre-course material](precourse)   
 [Schedule](schedule)  
+[Participants](participants.pdf)
+
 
 ## Address and travel suggestions
 [Travel Info](travel)  
 
 ## Course leaders
-Olga Dethlefsen (olga.dethlefsen@nbis.se)
+[Olga Dethlefsen](http://nbis.se/about/staff/olga-dethlefsen/)
 
-Agata Smialowska (agata.smialowska@nbis.se)
+[Agata Smialowska](http://nbis.se/about/staff/agata-smialowska/)
