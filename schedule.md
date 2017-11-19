@@ -3,10 +3,11 @@ layout: default
 title:  'Schedule'
 ---
 
-#### Click the heading of a topic to see the lecture slides or lab instructions. Note that we will be adding content here closer to the course.
+Course is held at SciLifeLab, Tomtebodavägen 23A, 171 65 Solna
 
-Course is held at SciLifeLab, Tomtebodavägen 23A, 17165 Solna
-Email (olga.dethlefsen@gmail.com) or call (0720 492 082) during the course
+Contact: [olga.dethlefsen@nbis.se](olga.dethlefsen@gmail.com); 0720 492 082
+
+
 
 ### Thursday 2017-10-23
 
@@ -18,7 +19,7 @@ Room: Gamma 6, Pascal
 
 **09.30 - 10.30** Lecture: ChIP-seq data analysis principles (Agata)
 
-**10.30 - 12.00** Practicals: ChIP-seq data processing (Olga, Verena Kutschera)
+**10.30 - 12.00** [Practicals: ChIP-seq data processing](labs/processing) (Olga, Verena Kutschera)
 
 **12.00 - 13.00** _lunch_
 
