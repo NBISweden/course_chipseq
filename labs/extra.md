@@ -3,6 +3,8 @@ layout: default
 title:  'ChIP-seq data processing tutorial'
 ---
 
+In progress...
+
 # ChIP-seq data processing tutorial 
 
 ## Introduction <a name="Introduction"></a>
@@ -11,7 +13,7 @@ REST (NRSF) is a transcriptional repressor that represses neuronal genes in non-
 
 One way to study REST on a genome-wide level is via ChIP sequencing (ChIP-seq). ChIP-seq is a method that allows to identify genome-wide occupancy patterns of proteins of interest such as transcription factors, chromatin binding proteins, histones, DNA / RNA polymerases etc.
 
-The first question one needs to address when working with ChIP-seq data is "Did my ChIP work?", i.e. whether the antibody-treatment enriched sufficiently so that the ChIP signal can be separated from the background signal. After all, around 90% of all DNA fragments in a ChIP experiment represent the genomic background. This question is impossible to answer by simply counting number of peaks or by visual inspection of mapped reads in a genome browser. Instead, several quality control methods have been developed to assess the quality of the ChIP-seq data. These are introduced in the first part of this tutorial. The second part deals with identification of binding sites and finding consensus peakset. In the third part look at the data: mapped reads, coverage profiles and peaks. All three parts come together to be able to assess the quality of the ChIP-seq experiment and are essential before running any down-stream analysis and drawing any biological conclusions from the data. 
+The first question one needs to address when working with ChIP-seq data is "Did my ChIP work?", i.e. whether the antibody-treatment enriched sufficiently so that the ChIP signal can be separated from the background signal. After all, around 90% of all DNA fragments in a ChIP experiment represent the genomic background. This question is impossible to answer by simply counting number of peaks or by visual inspection of mapped reads in a genome browser. Instead, several quality control methods have been developed to assess the quality of the ChIP-seq data. These are introduced in the first part of this tutorial. The second part deals with identification of binding sites and finding consensus peakset. In the third part look at the data: mapped reads, coverage profiles and peaks. All three parts come together to be able to assess the quality of the ChIP-seq experiment and are essential before running any down-stream analysis and drawing any biological conslusions from the data. 
 
 ## Content
 - [Introduction](#Introduction)
@@ -21,12 +23,11 @@ The first question one needs to address when working with ChIP-seq data is "Did 
 - [Part 1: Quality control and data processing](#QC)
 - [Part 2: Identification of binding sites](#BindingSites)
 - [Part 3: Visualisation of mapped reads, coverage profiles and peaks in a genome browser](#Visualisation)
-- [Summary](#Summary)
-- [Appendix: figures](#Appendix)
+
 
 ## Data <a name="Data"></a>
 
-We will use data that come from [ENCODE](www.encodeproject.org) project. These are ChiP-seq libraries (in duplicates) prepared to analyze REST transcription factor (mentioned in [Introduction](#Introduction)) in several human cells and in vitro differentiated neural cells. The ChIP data come with matching input chromatin samples. The accession numbers are listed in the Table 1 and separate sample accession numbers are listed in the Table 2
+We will use data that come from [ENCODE](www.encodeproject.org) project. These are ChiP-seq libraries (in duplicates) prepared to analyze REST transcritpion factor (mentioned in [Introduction](#Introduction)) in several human cells and in vitro differentiated neural cells. The ChIP data come with matching input chromatin samples. The accession numbers are listed in the Table 1 and separate sample accession numbers are listed in the Table 2
 
 
 | No |  Accession  | Cell line | Description                                            |
@@ -59,9 +60,53 @@ Reads were mapped by ENCODE consortium to the human genome assembly version hg19
 
 To shorten computational time required to run steps in this tutorial scaled down dataset by keeping reads mapping to chromosomes 1 and 2 only. Note: for the post peak-calling QC and differential occupancy, the peaks on chromosomes 1 and 2 were selected from the peaks called using the full data set.
 
-Please note that all methods used in this exercise perform significantly better when used on complete (i.e. non-subset) data sets. Their accuracy most often scales with the number of mapped reads in each library, but so does the run time. As a reference, for some of the steps, plots generated analysing the complete data set are also presented in the [Appendix](#Appendix) of this document.
 
-Last but not least, we have prepared intermediate files in case some steps will not work. These will allow you to progress through the analysis if you wish to skip a step or two. You will find all the files in the `~/chipseq/results` directory.
+
+Initial steps of data analysis in a ChIP-seq experiment are focused on addressing two questions:
+
+1. How successful was the ChIP-seq experiment? (quality control steps, part 1)
+
+2. Identification of binding sites for the factor of interest. (peak calling steps, part 2)
+
+
+The typical workflow in a ChIP-seq experiment (after an initial quality control, read preprocessing and read mapping to reference genome - steps not covered in this exercise)  includes:
+
+1. Post-alignment quality control (QC) to assess successful enrichment in ChIP by computing cross-correlation profile and associated metrics; the tool of choice is phantompeakqualtools (part 1 of this class).
+
+2. Processing of bam files to remove alignments of reads which
+(i) are duplicates and
+(ii) map to blacklisted regions ("hyper-chippable" regions).
+These reads may result from experimental artefacts and their presence may bias downstream analyses.
+Additionally, in  this step you will compute normalised coverage tracks; these will be later viewed in a genome browser
+(part 1 of this class).
+
+3. Other post-alignment QC steps (part 3 of this class, additional exercises) include calculation of
+	(i) cumulative enrichment
+	(ii) sample clustering in genomic bins mode.
+
+4. Identification of binding sites. Enriched regions aka peaks are identified using MACS2. After peak calling, several checks can be performed on the peak regions, for example selection of peaks consistently identified in both biological replicates. Subsequently, to assess similarity of binding profiles between samples, another round of sample clustering can be performed, this time of signal resulting from reads mapped to regions identified as the binding sites in all libraries.
+(part 2 of this class)
+
+
+5. Signal visualisation in a genome browser. The read alignments, normalised coverage tracks and binding sites are visualised for general signal assessment (part 2 of this class).
+Integrative genome browser [IGV](https://www.broadinstitute.org/igv/) is an easy to use tool compatible with all operating systems - please install it in your local computer if you haven't done so already.
+
+6. Additional exercises (part 3 of this class):
+
+	6.1. Computing cumulative enrichment as another metric to assess enrichment on ChIP-seq (deepTools).
+
+	6.2. Computing correlation between libraries in bins mode: in this method the genome is divided into bins of specified size and reads mapped to each bin are counted; the resulting signal profiles are used to cluster libraries to identify groups of similar signal profile (deepTools).
+
+	6.3. Alternative method for post-peak calling QC (R script, library ChIPQC).
+
+	6.5. Peak annotation and differential occupancy (R script, libraries ChIPpeakAnno and DiffBind).
+
+	6.6. Visualisation of the ChIP signal associated with genomic regions (deepTools).
+
+
+Please note that all methods used in this exercise perform significantly better when used on complete (i.e. non-subset) data sets. Their accuracy most often scales with the number of mapped reads in each library, but so does the run time. As a reference, for some of the steps, plots generated analysing the complete data set are also presented in the Appendix of this document.
+
+Last but not least, we have prepared intermediate files in case some step won't work; these will allow you to progress through the analysis. You will find them in the `/results` directory.
 
 ## Setting-up  <a name="Setting-up">
 Before we start tutorial, we need to set-up our work environment. In particular, we need to:
@@ -119,7 +164,7 @@ You will notice that you will load and unload modules practically before and aft
 
 <br />
 ## Part I: Quality control and alignment processing <a name="QC"></a>
-As discussed in the lecture and mentioned in the introduction, before being able to draw any biological conclusions from the ChIP-seq data we need to assess the quality of libraries, i.e. how successful was the ChIP-seq experiment. In fact, quality assessment of the data is something that should be kept in mind at every data analysis step. Here, we will look at the quality metrics independent of peak calling, that is we begin at the very beginning, with the aligned reads. A typical workflow includes:
+As disucssed in the lecture and mentioned in the introduction, before being able to draw any biological conlusions from the ChIP-seq data we need to assess the quality of libraries, i.e. how successful was the ChIP-seq experiment. In fact, quality assessment of the data is something that should be kept in mind at every data analysis step. Here, we will look at the quality metrics independent of peak calling, that is we begin at the very beginning, with the aligned reads. A typical workflow includes:
 - [strand cross-correlation analysis](#Xcor)
 - [alignment processing: removing dupliated reads, "hyper-chippable" regions, prepraing noramlised coverage tracks for viewing in a genome browser](#AlignmentProcessing)
 - [cumulative enrichment](#CumulativeEnrichment)
@@ -162,7 +207,7 @@ For comparison, the cross correlation metrics computed for the entire data set u
 cat ../../results/xcor/rest.xcor_metrics.txt
 ```
 
-The shape of the strand cross-correlation can be more informative than the summary statistics, so do not forget to view the plot. 
+The shape of the strand cross-corrlelation can be more informative than the summary statistics, so do not forget to view the plot. 
 - compare the plot `hela1_xcor.pdf` (cross correlation of the first replicate of REST ChIP in HeLa cells, using subset chromosome 1 and 2 subset data) with cross correlation computed using the all chromosomes data set (figures 1 - 3)
 - compare with the ChIP using the same antibody performed in HepG2 cells (figures 4 - 6).
 
@@ -171,7 +216,7 @@ To view .pdf directly from Uppmax with enabled X-forwarding:
 evince hela1_xcor.pdf &
 ```
 
-Otherwise, if the above does not work due to common configuration problems, copy the .pdf file to your local computer and open locally. To copy type from **a terminal window on your computer NOT connected to Uppmax**: 
+Otherwise, if the above does not work due to common configuration problems, copy the .pdf file to your local compouter and open locally. To copy type from **a terminal window on your computer NOT connected to Uppmax**: 
 ```bash
 scp <username>@milou.uppmax.uu.se:~/chipseq/analysis/xcor/*pdf ./
 ```
@@ -200,7 +245,7 @@ scp <username>@milou.uppmax.uu.se:~/chipseq/analysis/xcor/*pdf ./
 
 
 ### Alignment processing <a name="AlignmentProcessing"></a>
-Now we will do some data cleaning to try to improve the libraries quality. First, duplicated reads are marked and removed using MarkDuplicates tool from [Picard](http://broadinstitute.github.io/picard/command-line-overview.html#MarkDuplicates). Marking as "duplicates" is based on their alignment location, not sequence.
+Now we will do some data cleaning to try to improve the librarires quality. First, duplicated reads are marked and removed using MarkDuplicates tool from [Picard](http://broadinstitute.github.io/picard/command-line-overview.html#MarkDuplicates). Marking as "duplicates" is based on their alignment location, not sequence.
 
 ```bash
 module load samtools/1.1
@@ -255,7 +300,7 @@ module unload deepTools/2.0.1
 ```
 
 ### Cumulative enrichment <a name="CumulativeEnrichment"></a>
-[Cumulative enrichment](http://deeptools.readthedocs.io/en/latest/content/tools/plotFingerprint.html), aka BAM fingerprint, is yet another way of checking the quality of ChIP-seq signal. It determines how well the signal in the ChIP-seq sample can be differentiated from the background distribution of reads in the control sample. Cumulative enrichment is obtained by sampling indexed BAM files and plotting a profile of cumulative read coverages for each. All reads overlapping a window (bin) of the specified length are counted; these counts are sorted and the cumulative sum is finally plotted. For factors that will enrich well-defined, rather narrow regions, the resulting plot can be used to assess the strength of a ChIP, but the broader the enrichments are to be expected, the less clear the plot will be. Vice versa, if you do not know what kind of signal to expect, the fingerprint plot will give you a straight-forward indication of how careful you will have to be during your downstream analyses to separate biological noise from meaningful signal.
+[Cumulative enrichment](http://deeptools.readthedocs.io/en/latest/content/tools/plotFingerprint.html), aka BAM fingerprint, is yet another way of checking the quality of ChIP-seq signal. It determines how well the signal in the ChIP-seq sample can be differentiated from the background distribution of reads in the control sample. Cumulative enrichment is obtained by sampling indexed BAM files and ploting a profile of cumulative read coverages for each. All reads overlapping a window (bin) of the specified length are counted; these counts are sorted and the cumulative sum is finally plotted. For factors that will enrich well-defined, rather narrow regions, the resulting plot can be used to assess the strength of a ChIP, but the broader the enrichments are to be expected, the less clear the plot will be. Vice versa, if you do not know what kind of signal to expect, the fingerprint plot will give you a straight-forward indication of how careful you will have to be during your downstream analyses to separate biological noise from meaningful signal.
 
 To compute cumulative enrichment forHeLa REST ChIP and the corresponding input sample:
 
@@ -338,7 +383,7 @@ Now we know so much more about the quality of our ChIP-seq data. In this section
 ### Peak calling <a name="PeakCalling"></a>
 We will identify peaks in the ChIP-seq data using Model-based Analysis of ChIP-Seq [(MACS2)](https://github.com/taoliu/MACS). MACS captures the influence of genome complexity to evaluate the significance of enriched ChIP regions and is one of the most popular peak callers performing well on data sets with good enrichment of transcription factors. 
 
-Note that peaks should be called on each replicate separately (not pooled across replicates) as these can be later on used to identify peaks consistently found across replicates preparing a peaks set for down-stream analysis of differential occupancy, annotations etc. 
+Note that peaks should be called on each replicate separately (not pooled across replicates) as these can be later on used to identify peaks consistently found across replicates prepraing a peaks set for down-stream analysis of differential occupany, annotations etc. 
 
 To avoid long paths in the command line let's create links to BAM files with ChIP and input data. 
 
@@ -358,7 +403,7 @@ Before we jump to running MACS we need to look at parameters as there are severa
 * -f: file format
 * -n: output file names
 * -g: genome size, with common ones already encoded in MACS eg. -g hs   =  -g 2.7e9; -g mm   =  -g 1.87e9; -g ce   =  -g 9e7; -g dm   =  -g 1.2e8. In our case -g = 04.9e8 since we are till working on only on chromosomes 1 and 2 only
-* -q 0.01: q value (FDR) cutoff for reporting peaks; this is recommended over reporting raw (unadjusted) p values.
+* -q 0.01: q value (FDR) cutoff for reporting peaks; this is recommended over reporting raw (undajusted) p values.
 
 Let's run MACS2 now. MACS prints messages as it progresses through different stages of the process. This step may take more than 10 minutes.
 ```bash
@@ -436,14 +481,14 @@ Feel free to experiment more. When you have done all intersections you were inte
 module unload BEDTools/2.25.0
 ```
 
-So what about peaks reproducibility?
-* are peaks reproducible between replicates?
+So what about peaks reproduciblity?
+* are peaks reproducibile between replicates?
 * are peaks consistent across conditions?
 * any observations in respect to librarires quality and samples clustering?
 
 
 ### Merged peaks <a name="MergedPeaks"></a>
-Now it is time to generate a merged list of all peaks detected in the experiment, i.e. to find a consensus peakset that can be used for down-stream analysis. This is typically done by selecting peaks by overlapping and reproducibility criteria. Often it may be good to set overlap criteria stringently in order to lower noise and drive down false positives. The presence of a peak across multiple samples is an indication that it is a "real" binding site, in the sense of being identifiable in a repeatable manner. Here, we will use a simple method of putting peaks together with [BEDOPS](http://bedops.readthedocs.org/en/latest/) by preparing peakset in which all overlapping intervals are merged.  Files used in this step are derived from the `*.narrowPeak` files by selecting relevant columns, as before.
+Now it is time to generate a merged list of all peaks detected in the experiment, i.e. to find a consensus peakset that can be used for down-stream analysis. This is typically done by selecting peaks by overlapping and reproduciblity criteria. Often it may be good to set overlap criteria stringently in order to lower noise and drive down false positives. The presence of a peak across multiple samples is an indication that it is a "real" binding site, in the sense of being identifiable in a repeatable manner. Here, we will use a simple method of putting peaks together with [BEDOPS](http://bedops.readthedocs.org/en/latest/) by preparing peakset in which all overlapping intervals are merged.  Files used in this step are derived from the `*.narrowPeak` files by selecting relevant columns, as before.
 
 These files are already prepared and are under `peak_calling` directory
 
@@ -466,7 +511,7 @@ ln -s ../../results/peaks_bed/rest_peaks.chr12.bed ./rest_peaks.chr12.bed
 
 
 ### Quality control after peak calling <a name="QCPeaks"></a>
-Having a consensus peakset we can re-run samples clustering with deepTools using only peaks regions for the coverage analysis ([in BED mode](https://deeptools.readthedocs.io/en/latest/content/tools/multiBamSummary.html#id9). This may be informative when looking at samples similarities with clustering and heatmaps and it typically done for ChIP-seq experiments. This also gives an indications whether peaks are consistent between replicates given the signal strength in peaks regions. 
+Having a consensus peakset we can re-run samples clustering with deepTools using only peaks regions for the coverage analysis ([in BED mode](https://deeptools.readthedocs.io/en/latest/content/tools/multiBamSummary.html#id9). This may be informative when looking at samples similarites with clustering and heatmaps and it typically done for ChIP-seq experiments. This also gives an indications whether peaks are consistent between replicates given the singal strength in peaks regions. 
 
 Let's make a new directory to keep things organised and run deepTools in BED mode providing merged peakset we created:
 ```bash
@@ -537,7 +582,7 @@ Open IGV and load files
 
 Explore data
 - you can zoom in and move along chromosome 1 and 2
-- go to interesting locations, e.g. REST binding peaks detected in both HeLa samples, available in `peaks_hela.chr12.bed`
+- go to interesting locations, e.g. REST binidng peaks detected in both HeLa samples, available in `peaks_hela.chr12.bed`
 - you can change the signal display mode in the tracks in the left hand side panel. Right click in the BAM file track, select from the menu "display" - squishy; "color by" - read strand and "group by" - read strand
 
 To view the `peaks_hela.chr12.bed`
@@ -549,37 +594,142 @@ less peaks_hela.chr12.bed (to scroll-down the file)
 ```
 
 Exploration suggestions:
-- go to chr1:1,233,734-1,235,455 and chr2:242,004,675-242,008,035. You should be able to see signals as below
+- go to chr1:1,233,734-1,235,455 and chr2:242,004,675-242,008,035. You should be able to see singals as below
 
 ----
 
-![IGV](../figures/lab-processing/IGV_ex1.png)
+<img src="../figures/lab-processing/IGV_ex1.png" alt="" style="width: 400px;"/><br>
 
 Example IGV view centered around chr1:1,233,734-1,235,455
 
+
 ----
 
-![IGV](../figures/lab-processing/IGV_ex2.png)
+----
+
+<img src="../figures/lab-processing/IGV_exp2.png" alt="" style="width: 400px;"/><br>
 
 Example IGV view centered around chr2:242,004,675-242,008,035
 
 
 ----
 
+
 What do you think?
 * is the read distribution in the peaks (BAM file tracks) consistent with the expected bimodal distribution? 
 * can you see the difference in signal between ChIP and corresponding input?
-* does called peaks regions (BED file tracks) overlap with observed peaks (BAM files tracks), i.e. has the peak calling worked correctly?
+* does called peaks regions (BED file tracks) overlap with observed peaks (BAM files trakcs), i.e. has the peak calling worked correctly?
 * are the detected peaks associated with annotated genes?
 
-----
 
-## Summary <a name="Summary"></a>
-Congratulations! Now we know how to inspect ChIP-seq data and judge quality. If the data quality is good, we can continue with down-stream analysis (next part of this course). If not, well...better to repeat experiment than to waste resources on bad quality data. 
 
-----
 
-## Appendix <a name="Appendix"></a>
+
+
+## Part 3: Additional analyses
+The following parts are optional, and can be preformed independently of one another.
+
+The parts using R can be performed either by executing the scripts provided with the exercise from the command line, or by typing in all commands in an R console. The latter is recommended for people who have some previous exposure to the R environment. Post-peak calling QC is performed using the R / Bioconductor package ChIPQC, and some steps are redundant with the steps already performed; it is an alternative to the already presented workflow. Differential Occupancy and Peak Annotation sections present examples using R packages developed specifically for analysis of ChIP-seq data (there are many more useful packages in Bioconductor).
+
+
+### Alternative Quality Control Workflow in R
+
+Before you start using R, you need to set the environmental variable that holds information on where R libraries are installed. In this exercise you will use libraries installed in the class home directory (simply because it takes quite some time to install all dependencies). The path should already be set, inspect it by:
+
+```bash
+echo $R_LIBS
+```
+
+The result should be `/sw/courses/ngsintro/chipseq/software/R_lib`. If it is not, source the `chipseq_env.sh` script.
+
+
+You will start in directory `/analysis/R`. The file `REST_samples.txt` contains information on files location, and the paths are given in relation to `/analysis/R`; if you choose to start in another directory, please modify the paths in `REST_samples.txt`. This script takes a while to run.
+
+```bash
+cd ../analysis/R
+Rscript chipqc.R
+```
+
+Inspect the html output of this script.
+
+### Differential Occupancy and Peak Annotation in R
+
+Before you start using R, you need to set the environmental variable that holds information on where R libraries are installed. In this exercise you will use libraries installed in the class home directory (simply because it takes quite some time to install all dependencies). The path should already be set, inspect it by:
+
+```bash
+echo $R_LIBS
+```
+
+The result should be `/sw/courses/ngsintro/chipseq/software/R_lib`. If it is not, source the `chipseq_env.sh` script.
+
+Please note that normally three biological replicates are required for statistical analysis of factor occupancy. There are only two replicates each in the ENCODE data sets used in this class - hence you use duplicates for demonstration sake. This script uses the same sample information file as the previous one; the paths are all relative to the `/analysis/R directory`.
+
+```bash
+cd ../analysis/R
+Rscript diffbind_annot.R
+```
+
+People familiar with R can modify and execute the commands from within the R terminal, selecting different contrasts of interest, for example.
+
+### Signal visualisation using deepTools
+
+You will visualise ChIP signal in relation to annotated transcription start sites (TSS) on chromosomes 1 and 2. A description of all visualisation options is given at [deepTools](http://deeptools.readthedocs.org/en/latest/content/list_of_tools.html). Create a separate directory in `/analysis`; cd to it. Check if all the paths to create links are correct for the location of your directory. For details on the options of the applications used, please consult the documentation available at [computeMatrix](http://deeptools.readthedocs.org/en/latest/content/tools/computeMatrix.html) and [plotHeatmap](http://deeptools.readthedocs.org/en/latest/content/tools/plotHeatmap.html).
+
+First you will compute the matrix of values using computeMatrix. This program takes [bigWig](https://genome.ucsc.edu/goldenpath/help/bigWig.html) files as input; you will need to convert bedgraph to bigWig using UCSC utilities:
+
+```bash
+cd analysis/
+mkdir vis
+cd vis
+
+cp ../../hg19/chrom.sizes.hg19 chrom.sizes.hg19
+cp ../bam_preproc/ENCFF000PED.chr12.cov.norm1x.bedgraph ./
+
+module load ucsc-utilities/v287
+
+bedGraphToBigWig ENCFF000PED.chr12.cov.norm1x.bedgraph chrom.sizes.hg19 hela_1.bw
+
+module unload ucsc-utilities/v287
+```
+
+You are now ready to compute the matrix of scores for visualisation. You will need a bed file with positions of TSS; you can copy it to your current directory.
+
+```bash
+cp ../../hg19/refGene_hg19_TSS_chr12.bed ./
+
+module load deepTools/2.0.1
+
+computeMatrix reference-point -S hela_1.bw \
+-R refGene_hg19_TSS_chr12.bed -b 5000 -a 5000 \
+--outFileName matrix.tss.dat --outFileNameMatrix matrix.tss.txt \
+--referencePoint=TSS --numberOfProcessors=max
+```
+
+Having the matrix of scores ready, you can now plot the binding profile around TSS and the heatmap:
+
+```bash
+plotHeatmap --matrixFile matrix.tss.dat \
+--outFileName tss.hela_1.pdf \
+--sortRegions descend --sortUsing mean
+
+module unload deepTools/2.0.1
+```
+
+## Concluding remarks
+
+The workflow presented in this exercise is similar to a typical one used for analysis of ChIP-seq data. There are more types of analyses you can do, which were not discussed here. One typical task is to identify short sequence motifs enriched in the regions bound by the assayed factor (peaks). There are several tools available, and I recommend testing at least two tools for your data.
+
+[Homer](http://homer.salk.edu/homer/)
+
+[GEM](http://groups.csail.mit.edu/cgs/gem/)
+
+[RSAT](http://floresta.eead.csic.es/rsat/peak-motifs_form.cgi)
+
+[MEME](http://meme-suite.org/)
+
+## Appendix
+
+
 
 ### Figures generated during class 
 
@@ -612,9 +762,14 @@ Figure 12. Sample clustering (spearman) by reads mapped in bins genome-wide; onl
 
 ----
 
+<img src="../figures/lab-processing/resHelaProfileTSS.png" alt="" style="height: 400px;"/><br>
+
+Figure 13. Binding profile in HeLa replicate 1, centered on TSS; data subset to chromosome 1 and 2
 
 
-### Figures generated using complete dataset
+----
+
+### Figures generated using the full (i.e. not subset) data set
 
 
 <img src="../figures/lab-processing/helaprocfingerprint.png" alt="" style="width: 400px;"/><br>
@@ -638,8 +793,5 @@ Figure 16. Sample clustering (pearson) by reads mapped in merged peaks
 
 ----
 
-## Authors
-
 Author: Agata Smialowska
-
 Contributions: Olga Dethlefsen
