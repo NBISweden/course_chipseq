@@ -38,8 +38,6 @@ source ~/chipseq_env.sh
 
 We will usage Bioconductor package [DiffBind](http://bioconductor.org/packages/release/bioc/html/DiffBind.html) to identify sites that are differentially bound between two sample groups. The package includes "functions to support the processing of peak sets, including overlapping and merging peak sets, counting sequencing reads overlapping intervals in peak sets, and identifying statistically significantly differentially bound sites based on evidence of binding affinity (measured by differences in read densities). To this end it uses statistical routines developed in an RNA-Seq context (primarily the Bioconductor packages edgeR and DESeq2 ). Additionally, the package builds on Rgraphics routines to provide a set of standardized plots to aid in binding analysis." This means that we will repeat finding a consenus peakset in a more powerful way before identyfing differentially bound sites. Actually, defying the consensus peaks is an important step that takes up entire chapter in the DiffBind manual. Read seciotion [6.2](http://bioconductor.org/packages/devel/bioc/vignettes/DiffBind/inst/doc/DiffBind.pdf) if you like to even more. 
 
-So how does the differential binding affinity analysis work? "The core functionality of DiffBind is the differential binding a nity analysis, which enables binding sites to be identified that are statistically significantly differentially bound between sample groups. To accomplish this, first a contrast (or contrasts) is established, dividing the samples into groups to be compared. Next the core analysis routines are executed, by default using DESeq2. This will assign a p-value and FDR to each candidate binding site indicating confidence that they are differentially bound."
-
 Follow Uppmax or local version to go further
 * [Uppmax version](#DB_uppmax)
 * [Local version](#DB_local)
@@ -135,7 +133,7 @@ pvals <- dba.plotBox(res.cnt3, contrast=1)
 dev.off()
 
 # extrating differentially bidning sites in GRanges
-res.db1 = dba.report(res.cnt3, contrast=1)
+rest.db1 = dba.report(res.cnt3, contrast=1)
 head(rest.db1)
 
 # plotting overlaps of sites bound by REST in different cell types
@@ -143,64 +141,93 @@ pdf("binding_site_overlap_sknsh.pdf")
 dba.plotVenn(res.cnt3, 1:4, label1="HeLa",label2="neuron",label3="HepG2",label4="sknsh")
 dev.off()
 
-# finally, let's save our R session including the generated data. We will need everything in the next section
-save.image("diffBind.RData")
 ```
+
 
 ### Local version <a name="DB_local">
 
+
+
+## Part 3: Additional analyses
+The following parts are optional, and can be preformed independently of one another.
+
+The parts using R can be performed either by executing the scripts provided with the exercise from the command line, or by typing in all commands in an R console. The latter is recommended for people who have some previous exposure to the R environment. Post-peak calling QC is performed using the R / Bioconductor package ChIPQC, and some steps are redundant with the steps already performed; it is an alternative to the already presented workflow. Differential Occupancy and Peak Annotation sections present examples using R packages developed specifically for analysis of ChIP-seq data (there are many more useful packages in Bioconductor).
+
+### Differential Occupancy and Peak Annotation in R
+
+Before you start using R, you need to set the environmental variable that holds information on where R libraries are installed. In this exercise you will use libraries installed in the class home directory (simply because it takes quite some time to install all dependencies). The path should already be set, inspect it by:
+
+```bash
+echo $R_LIBS
+```
+
+The result should be `/sw/courses/ngsintro/chipseq/software/R_lib`. If it is not, source the `chipseq_env.sh` script.
+
+Please note that normally three biological replicates are required for statistical analysis of factor occupancy. There are only two replicates each in the ENCODE data sets used in this class - hence you use duplicates for demonstration sake. This script uses the same sample information file as the previous one; the paths are all relative to the `/analysis/R directory`.
+
+```bash
+cd ../analysis/R
+Rscript diffbind_annot.R
+```
+
+People familiar with R can modify and execute the commands from within the R terminal, selecting different contrasts of interest, for example.
+
+
+
+
+
+
+
+
+## Differential binding (run locally) <a name="DB_local">
 ## Functional analysis <a name="FA">
-
-So now we have list of differentially bound sites for comparisons of interest but we do not know much about them beside the genomic location. It is time to find out more. To do so, in this section we will uuse another Bioconductor package, [ChIPpeakAnno](http://bioconductor.org/packages/release/bioc/vignettes/ChIPpeakAnno/inst/doc/pipeline.html). 
-
-ChIPpeakAnno "is for facilitating the downstream analysis for ChIP-seq experiments. It includes functions to find the nearest gene, exon, miRNA or custom features such as the most conserved elements and other transcription factor binding sites supplied by users, retrieve the sequences around the peak, obtain enriched Gene Ontology (GO) terms or pathways. Starting 2.0.5, new functions have been added for finding the peaks with bi-directional promoters with summary statistics (peaksNearBDP), for summarizing the occurrence of motifs in peaks (summarizePatternInPeaks) and for adding other IDs to annotated peaks or enrichedGO (addGeneIDs). Starting 3.4, permutation test has been added to determine whether there is a significant overlap between two sets of peaks. In addition, binding patterns of multiple transcription factors (TFs) or distributions of multiple epigenetic markers around genomic features could be visualized and compared easily using a side-by-side heatmap and density plot.
-
-Here, we will annotate differentialy bound sites, summarize the in a genomic feature context and obtain enriched GO terms and pathways. Note this part requires usage of annotation packages that are not all available on Uppmax. The Uppmax version contains only peaks annotations, whereas the local version contains GO and pathways analysis. 
-
-### Uppmax version <a name="FA_uppmax"
-
-We will continue our R session. If you have logged-out or lost connection or simply want to start fresh: check pathways to R libraries and re-set if needed, navigate to R directory, load R packages, open R and load back the data saved in the differential bidning session. We will build on them. 
-
-
-```bash
-cd ~/chipseq/analysis/R
-
-module load R_packages/3.4.0
-
-R
-
-load("diffBind.RData")
-
-```
-
-
-```bash
-
-# Loading DiffBind library
-# we will need it to extract interesting peaks for down-stream analysis
-library(DiffBind)
-
-# Loading ChIPpeakAnno library
-library(ChIPpeakAnno)
-
-# Loading TSS Annotation For Human Sapiens (GRCh37) Obtained From BiomaRt
-data(TSS.human.GRCh37)
-
-# Peaking the peaks for the interesting comparison, e.g.
-data.peaks = dba.report(res.cnt3, contrast=1)
-
-# Annotate peaks with information on closest TSS using precompiled annotation data 
-data.peaksAnno=annotatePeakInBatch(data.peaks, AnnotationData=TSS.human.GRCh37)
-
-# Saving results
-write.table(data.peaksAnno, file="peaks_HeLa_vs_neuronal.txt", sep="\t", row.names=F)
-```
-
-### Local version <a name="FA_local">
-
-
+## Functional analysis <a name="FA_local">
 ## What's next <a name="Next">
 
+
+### Signal visualisation using deepTools
+
+You will visualise ChIP signal in relation to annotated transcription start sites (TSS) on chromosomes 1 and 2. A description of all visualisation options is given at [deepTools](http://deeptools.readthedocs.org/en/latest/content/list_of_tools.html). Create a separate directory in `/analysis`; cd to it. Check if all the paths to create links are correct for the location of your directory. For details on the options of the applications used, please consult the documentation available at [computeMatrix](http://deeptools.readthedocs.org/en/latest/content/tools/computeMatrix.html) and [plotHeatmap](http://deeptools.readthedocs.org/en/latest/content/tools/plotHeatmap.html).
+
+First you will compute the matrix of values using computeMatrix. This program takes [bigWig](https://genome.ucsc.edu/goldenpath/help/bigWig.html) files as input; you will need to convert bedgraph to bigWig using UCSC utilities:
+
+```bash
+cd analysis/
+mkdir vis
+cd vis
+
+cp ../../hg19/chrom.sizes.hg19 chrom.sizes.hg19
+cp ../bam_preproc/ENCFF000PED.chr12.cov.norm1x.bedgraph ./
+
+module load ucsc-utilities/v287
+
+bedGraphToBigWig ENCFF000PED.chr12.cov.norm1x.bedgraph chrom.sizes.hg19 hela_1.bw
+
+module unload ucsc-utilities/v287
+```
+
+You are now ready to compute the matrix of scores for visualisation. You will need a bed file with positions of TSS; you can copy it to your current directory.
+
+```bash
+cp ../../hg19/refGene_hg19_TSS_chr12.bed ./
+
+module load deepTools/2.0.1
+
+computeMatrix reference-point -S hela_1.bw \
+-R refGene_hg19_TSS_chr12.bed -b 5000 -a 5000 \
+--outFileName matrix.tss.dat --outFileNameMatrix matrix.tss.txt \
+--referencePoint=TSS --numberOfProcessors=max
+```
+
+Having the matrix of scores ready, you can now plot the binding profile around TSS and the heatmap:
+
+```bash
+plotHeatmap --matrixFile matrix.tss.dat \
+--outFileName tss.hela_1.pdf \
+--sortRegions descend --sortUsing mean
+
+module unload deepTools/2.0.1
+```
 
 ## Concluding remarks
 
@@ -214,6 +241,25 @@ The workflow presented in this exercise is similar to a typical one used for ana
 
 [MEME](http://meme-suite.org/)
 
-## Appendix (add generated figures)
+## Appendix
 
 
+### Alternative Quality Control Workflow in R
+
+Before you start using R, you need to set the environmental variable that holds information on where R libraries are installed. In this exercise you will use libraries installed in the class home directory (simply because it takes quite some time to install all dependencies). The path should already be set, inspect it by:
+
+```bash
+echo $R_LIBS
+```
+
+The result should be `/sw/courses/ngsintro/chipseq/software/R_lib`. If it is not, source the `chipseq_env.sh` script.
+
+
+You will start in directory `/analysis/R`. The file `REST_samples.txt` contains information on files location, and the paths are given in relation to `/analysis/R`; if you choose to start in another directory, please modify the paths in `REST_samples.txt`. This script takes a while to run.
+
+```bash
+cd ../analysis/R
+Rscript chipqc.R
+```
+
+Inspect the html output of this script.

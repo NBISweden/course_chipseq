@@ -26,7 +26,7 @@ The first question one needs to address when working with ChIP-seq data is "Did 
 
 ## Data <a name="Data"></a>
 
-We will use data that come from [ENCODE](www.encodeproject.org) project. These are ChiP-seq libraries (in duplicates) prepared to analyze REST transcription factor (mentioned in [Introduction](#Introduction)) in several human cells and in vitro differentiated neural cells. The ChIP data come with matching input chromatin samples. The accession numbers are listed in the Table 1 and separate sample accession numbers are listed in the Table 2
+We will use data that come from [ENCODE](www.encodeproject.org) project. These are ChIP-seq libraries (in duplicates) prepared to analyze REST transcription factor (mentioned in [Introduction](#Introduction)) in several human cells and in vitro differentiated neural cells. The ChIP data come with matching input chromatin samples. The accession numbers are listed in the Table 1 and separate sample accession numbers are listed in the Table 2
 
 
 | No |  Accession  | Cell line | Description                                            |
@@ -70,11 +70,11 @@ Before we start tutorial, we need to set-up our work environment. In particular,
 * [learn how to read commands and use module system on Uppmax](#CommandsAndModules)
 
 ### Using computational resources <a name="UppmaxNode"></a>
-We have booked half a node on Milou per course participant. To run the tutorial in the interactive mode log to Milou and run _salloc_ command. <font color='red'> Note: run salloc only once not to take away node allocation from other course participants</font>. 
+We have booked half a node on Milou per course participant. To run the tutorial in the interactive mode log to Milou and run _interactive_ command. <font color='red'> 
 
 ```bash
-ssh -Y username@milou.uppmax.uu.se
-salloc -A g2017022 -t 08:00:00 -p core -n 8 --no-shell --reservation=g2017022_1 &
+ssh -Y <username>@milou.uppmax.uu.se
+interactive -A g2017022 --reservation=g2017022_THU 
 ```
 
 Check which node you were assigned
@@ -638,8 +638,8 @@ Figure 16. Sample clustering (pearson) by reads mapped in merged peaks
 
 ----
 
-## Authors
 
-Author: Agata Smialowska
 
-Contributions: Olga Dethlefsen
+Written by: Agata Smialowska
+
+Contributions by: Olga Dethlefsen
