@@ -1,26 +1,27 @@
-[//]: # (csaw tutorial for ChIP-seq class))
+---
+layout: default
+title:  'csaw'
+---
 
 <!-- version 1
 still experimental, to be improved
 22 xi 2017
  -->
 
-# Detection of differential binding using csaw
+# Detection of differential binding sites using csaw
 
 This is an alternative workflow for detection of differential binding / occupancy in ChIP-seq data. In contrast to working with reads counted within peaks detected in a peak calling step (as in the earlier example with DiffBind), this approach uses a sliding window to count reads across the genome. Each window is then tested for significant differences between libraries from different conditions, using the methods in the edgeR package. This package also offers an FDR control strategy more appropriate for ChIP-seq experiments than simple BH adjustment.
 
 It can be used for point-source binding (TFs) as well as for broad signal (histones). However, it can only be used for cases where ***global occupancy leves are unchanged***.
 
-
-As this method is agnostic to signal structure, it requires careful choice of strategies for filtering and normalisation. Here we give an example of a very simple workflow; more details can be found in the Csaw User Guide document available from Bioconductor.
-
+As this method is agnostic to signal structure, it requires careful choice of strategies for filtering and normalisation. Here, we show a very simple workflow. More details can be found in the [Csaw User Guide document](http://bioconductor.org/packages/devel/bioc/vignettes/csaw/inst/doc/csawUserGuide.pdf) available from Bioconductor.
 
 
 ## Requirements
 
 * R version 3.4.2 (2017-09-28)
-* statmod (required for csaw) (https://cran.r-project.org/web/packages/statmod/index.html)
-* gfortran (required for csaw) (https://gcc.gnu.org/wiki/GFortranBinaries)
+* [statmod](https://cran.r-project.org/web/packages/statmod/index.html), required for csaw
+* [gfortran](https://gcc.gnu.org/wiki/GFortranBinaries), required for csaw
 * csaw
 * edgeR
 
@@ -28,51 +29,45 @@ Required for annotation in our example:
 * org.Hs.eg.db
 * TxDb.Hsapiens.UCSC.hg19.knownGene
 
+Recommended:
+* R-Studio to work in
 
-To install R packages:
+*Note: this exercise is to be run locally. We have not tested it on Uppmax.*
+
+
+To install R packages use `install.packages` command e.g.
 ```
 install.packages("https://cran.r-project.org/src/contrib/statmod_1.4.30.tar.gz", repo=NULL, type="source")
 ```
 
+To install Bioconductor packages:
 ```
 source("https://bioconductor.org/biocLite.R")
 biocLite(c("csaw","edgeR","org.Hs.eg.db","TxDb.Hsapiens.UCSC.hg19.knownGene"))
 ```
 
-To install gfortran, follow the directions on its homepage. Further dependencies may be required for successful installation.
+To install gfortran follow the directions on its [homepage](https://gcc.gnu.org/wiki/GFortranBinaries). Further dependencies may be required for successful installation.
 
-## Workflow
+## Getting the data
 
-*We recommend to perform this exercise on your local computer. Currently it is not tested on Uppmax.*
-
-We will examine differences in REST binding in two cell types: SKNSH and HeLa.
-
-### Obtain data files
-
-Download required files from:
+We will examine differences in REST binding in two cell types: SKNSH and HeLa. We need to download required files. Let's use the Box links for simplicity. 
 
 HeLa:
 
-https://stockholmuniversity.box.com/s/2o3lchp61kzxpil1y1snn4onjk4e0sjo (zip)
-
-https://stockholmuniversity.box.com/s/wmx4uhgo3esuessr4f8g9kmvarm42bxz (tar.gz)
+* [zip](https://stockholmuniversity.box.com/s/2o3lchp61kzxpil1y1snn4onjk4e0sjo)
+* [tar.gz](https://stockholmuniversity.box.com/s/wmx4uhgo3esuessr4f8g9kmvarm42bxz)
 
 SKNSH:
 
-https://stockholmuniversity.box.com/s/dkurmi5suwh3qnxnx0ysfhh5c0g2d1ti (zip)
+* [zip](https://stockholmuniversity.box.com/s/dkurmi5suwh3qnxnx0ysfhh5c0g2d1ti)
+* [tar.gz](https://stockholmuniversity.box.com/s/8m3rgtakx8h8rmhnwltitqccbx7h0wy3)
 
-https://stockholmuniversity.box.com/s/8m3rgtakx8h8rmhnwltitqccbx7h0wy3 (tar.gz)
-
-Decompress the folders:
+To extract tar.gz files 
 ```
 tar -zxvf archive_name.tar.gz
 ```
 
-... and now we are ready to go.
-
-*The remaining part of the workflow will take place in an R environment of your choice (for example in RStudio).*
-
-### Load data and prepare contrast
+## Loading data and preparing contrast
 
 Modify the paths to folders with respective data to match your local setup:
 
@@ -121,24 +116,22 @@ Now we are ready to load data and create an object with counted reads:
 library(csaw)
 data <- windowCounts(bam.files, ext=100, width=10) 
 ```
+Parameters for file loading can be modified (examples in the csaw User Guide), depending on how the data was processed. Here we explicitely input the value for fragment length as we have this information from the cross correlation analysis performed earlier (ChIP-seq data processing tutorial). It is 100 for Hela and 95 & 115 for sknsh.
 
-Parameters for file loading can be modified (examples in the csaw User Guide), depending on how the data was processed. Here we explicitely input the value for fragment length, as we have this information from the cross correlation analysis performed earlier. It is 100 for Hela and 95 & 115 for sknsh.
-
-We can inspect the resulting `data` object, for example:
+We can inspect the resulting `data` object, e.g.:
 ```
 > data$totals
 [1] 1637778 2009932 2714033 4180463
 ```
 
-### Filtering out regions with very low coverage
+## Filtering out regions with very low coverage
 
-The next step is to filter out uninformative regions, i.e. windows with low read count, which represent background. There are many strategies to do it, depending on the biology of the experiment, IP efficiency and data processing. Here we filter out lowest 99.9% of the windows, retaining the 0.1% windows with highest signal. The rationale is that for TF experiments, only 0.1% of the genome can be bound, hence the remaining must represent background.
+The next step is to filter out uninformative regions, i.e. windows with low read count, which represent background. There are many strategies to do it, depending on the biology of the experiment, IP efficiency and data processing. Here, we filter out lowest 99.9% of the windows, retaining the 0.1% windows with highest signal. The rationale is that for TF experiments only 0.1% of the genome can be bound, hence the remaining must represent background.
 
 ```
 keep <- filterWindows(data, type="proportion")$filter > 0.999
 data.filt <- data[keep,]
 ```
-
 To investigate the effectiveness of our filtering strategy:
 
 ```
@@ -147,34 +140,28 @@ To investigate the effectiveness of our filtering strategy:
 logical  145558    9850 
 ```
 
-### Normalisation
+## Normalisation
 
-#### Assigning reads into larger bins for normalisation
-
+Assigning reads into larger bins for normalisation:
 ```
 binned <- windowCounts(bam.files, bin=TRUE, width=10000)
 ```
 
-
-#### Calculating normalization factors
-
+Calculating normalization factors:
 ```
 data.filt <- normOffsets(binned, se.out=data.filt)
 ```
 
-We can inspect the normalisation factors:
-
+Inspecting the normalisation factors:
 ```
 > data.filt$norm.factors
 [1] 0.9727458 1.0718693 0.9279702 1.0335341
 ```
 
 
-### Detection of differential binding (DB)
+## Detecting differentially binding (DB) sites
 
-
-#### Detection of DB windows
-
+Detecting DB windows:
 ```
 data.filt.calc <- asDGEList(data.filt)
 data.filt.calc <- estimateDisp(data.filt.calc, design)
@@ -182,8 +169,7 @@ fit <- glmQLFit(data.filt.calc, design, robust=TRUE)
 results <- glmQLFTest(fit, contrast=contrast)
 ```
 
-An inspection of the results table:
-
+Inspecting the results table:
 ```
 > head(results$table)
      logFC   logCPM         F       PValue
@@ -195,7 +181,7 @@ An inspection of the results table:
 6 4.336717 2.052296 14.330442 1.538194e-04
 ```
 
-#### Correcting for multiple testing
+## Correcting for multiple testing
 
 First we merge adjacent DB windows into longer clusters. Windows that are less than `tol` apart are considered to be adjacent and are grouped into the same cluster. The chosen `tol`
 represents the minimum distance at which two binding events are treated as separate sites.
@@ -246,7 +232,7 @@ test individually when multiple tests in a cluster represent parts of the same u
 genomic regions consisting of clusters of windows. The BH method is then applied to control the
 FDR across all clusters.
 
-#### Inspecting the results
+## Inspecting the results
 
 We select statistically significant DB events at FDR 0.05:
 
@@ -292,8 +278,6 @@ tab.best <- getBestTest(merged$id, results$table)
 6 0.0081582774
 ```
 
-#### MDS
-
 We can inspect congruency of the replicates on MDS. We subsample counts for faster calculations:
 
 ```
@@ -305,7 +289,7 @@ labels=c("hela", "hela", "sknsh", "sknsh"), top=top)
 }
 ```
 
-### Annotation of the results
+## Annotation of the results
 
 
 ```
@@ -320,7 +304,7 @@ merged$region$left <- anno$left
 merged$region$right <- anno$right
 ```
 
-### Creating the final object with results and annotation
+## Creating the final object with results and annotation
 
 Now we bring it all together:
 
