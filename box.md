@@ -4,7 +4,7 @@ title:  'Alternative files locations'
 ---
 
 
-We have also uploaded some of the files to Box. It may be easier to download them that way but most importantly it is to make sure we can continue with excercises even if we experience problems with Uppmax. Files available on Box are listed below.
+We have also uploaded some of the files to Box. It may be easier to download them that way but most importantly it is to make sure we can continue with exercises even if we experience problems with Uppmax. Files available on Box are listed below.
 
 ## Files to explore data with IGV
 _for part III: Visualisation of mapped reads, coverage profies and peaks of the ChIP-seq data processing tutorial_
