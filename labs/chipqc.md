@@ -10,6 +10,7 @@ Here, we will explore the alternative quality control workflow, using Bioconduct
 ## Setting-up
 You can choose to run this example on Uppmax or locally. 
 
+**Uppmax**
 To run on Uppmax, assuming the same files structure as for the [ChIP-seq data processing tutorial](processing) set pathway to R libraries installed on Uppmax, navigate to R directory and open R:
 ```bash
 
@@ -21,6 +22,7 @@ R
 
 ```
 
+**Locally**
 To run locally, follow set-up instructions from [Down-stream analysis tutorial](diffBinding), differential binding part. We will need the same files and we can work in the same directory. Install ChIPQC library:
 ```bash
 source("https://bioconductor.org/biocLite.R")
