@@ -73,7 +73,7 @@ Before we start tutorial, we need to set-up our work environment. In particular,
 We have booked half a node on Milou per course participant. To run the tutorial in the interactive mode log to Milou and run _interactive_ command. <font color='red'> 
 
 ```bash
-ssh -Y <username>@milou.uppmax.uu.se
+ssh -Y username@milou.uppmax.uu.se
 interactive -A g2017022 --reservation=g2017022_THU 
 ```
 
