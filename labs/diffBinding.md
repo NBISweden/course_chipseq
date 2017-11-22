@@ -413,32 +413,38 @@ The workflow presented in this exercise is similar to a typical one used for ana
 ## Appendix: figures <a name="Appendix">
 
 ![correlation_librarires_normalised](../figures/lab-diffBinding/correlation_libraries_normalised.pdf)
+
 Fig: Correlation of libraries based on normalised counts of reads in peaks
 
 ----
 
 ![PCA](../figures/lab-diffBinding/PCA_normalised_libraries.pdf)
+
 Fig: PCA scores plot: data overview using normalised counts of reads in peaks
 
 ----
 
 ![Heatmap](../figures/lab-diffBinding/correlation_HeLa_vs_neuronal.pdf)
+
 Fig: Correlation heatmap  using only significantly differentially bound sites for HeLa and neuronal
 # choose the contrast of interest e.g. HeLa vs. neuronal (#1)
 
 ----
 
 ![Boxplot](../figures/lab-diffBinding/Boxplot_HeLa_vs_neuronal.pdf)
+
 Fig: Boxplots of reads distributions between HeLa and neuronal
 
 ----
 
-![Venn](../figures/lab-diffBinding/binding_site_overlap.pd)
+![Venn](../figures/lab-diffBinding/binding_site_overlap.pdf)
+
 Fig: Venn diagram of overlapping sites bound by REST in different cell types
 
 ----
 
 ![Features](../figures/lab-diffBinding/peaks_featuresDistr_HeLa_vs_neuronal.pdf)
+
 Fig: Boxplots of reads distributions between HeLa and neuronal
 
 

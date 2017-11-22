@@ -16,7 +16,7 @@ Room: Gamma 6, Pascal
 
 **09:00 - 09.30** [Welcome, incl. getting to know each other](lectures/welcome.pdf) (Olga Dethlefsen, Agata Smialowska)
 
-**09.30 - 10.30** Lecture: ChIP-seq data analysis principles (Jakub Westholm)
+**09.30 - 10.30** [Lecture: ChIP-seq data analysis principles](lectures/ChIP-seq_AS_JW.pdf) (Jakub Westholm)
 
 **10.30 - 12.00** [Practicals: ChIP-seq data processing](labs/processing) (Olga, Jakub, Verena Kutschera)
 
@@ -33,13 +33,13 @@ Room: Gamma 6, Pascal
 
 **09.00 - 09.30** Welcome to day 2 (Olga)
 
-**09.30 - 12.00** [Practicals: ChiP-seq data processing](labs/processing), [down-stream analysis](labs/diffBinding) or [extra](labs/extras) (Olga, Agata, Jakub, Verena)
+**09.30 - 12.00** [Practicals: down-stream analysis](labs/diffBinding) and optional [extras](index) (Olga, Agata, Jakub, Verena)
 
 **12.00 - 13.00** _lunch_
 
 **13.00 - 14.00** Introduction to SciLifeLab NGI ChIP-seq pipeline (Phil Ewels)
 
-**14.00 - 15.00** [Practicals: ChiP-seq data processing](labs/processing), [down-stream analysis](labs/diffBinding) or [extra](labs/extras) (Olga, Agata, Jakub, Verena)
+**14.00 - 15.00** [Practicals: down-stream analysis](labs/diffBinding) and optional [extras](index) (Olga, Agata, Jakub, Verena)
 
 **15.00 - 16.00** Group discussion: what have we learned and what is next (Olga, Agata, Jakub, Verena)
 

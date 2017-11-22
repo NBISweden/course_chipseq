@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.18)  16 NOV 2017 16:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.18)  22 NOV 2017 15:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1066,7 +1066,7 @@ LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <8> not available
 
 ]
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <10> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 140.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 141.
  [4
 
 ]
@@ -1075,7 +1075,7 @@ File: ../figures/lecture-welcome/NBIS-main.png Graphic file (type png)
 
 <use ../figures/lecture-welcome/NBIS-main.png>
 Package pdftex.def Info: ../figures/lecture-welcome/NBIS-main.png used on input
- line 154.
+ line 155.
 (pdftex.def)             Requested size: 177.86134pt x 68.45453pt.
 
 <../figures/lecture-welcome/NBIS-3.png, id=59, 824.07875pt x 335.2525pt>
@@ -1083,7 +1083,7 @@ File: ../figures/lecture-welcome/NBIS-3.png Graphic file (type png)
 
 <use ../figures/lecture-welcome/NBIS-3.png>
 Package pdftex.def Info: ../figures/lecture-welcome/NBIS-3.png used on input li
-ne 154.
+ne 155.
 (pdftex.def)             Requested size: 247.22552pt x 100.57652pt.
 
 <../figures/lecture-welcome/NBIS-logos.png, id=60, 979.66pt x 56.21pt>
@@ -1091,7 +1091,7 @@ File: ../figures/lecture-welcome/NBIS-logos.png Graphic file (type png)
 
 <use ../figures/lecture-welcome/NBIS-logos.png>
 Package pdftex.def Info: ../figures/lecture-welcome/NBIS-logos.png used on inpu
-t line 154.
+t line 155.
 (pdftex.def)             Requested size: 293.90027pt x 16.86311pt.
  [5
 
@@ -1102,7 +1102,7 @@ pt>
 File: ../figures/lecture-welcome/SciLifeLab-main.png Graphic file (type png)
  <use ../figures/lecture-welcome/SciLifeLab-main.png>
 Package pdftex.def Info: ../figures/lecture-welcome/SciLifeLab-main.png used on
- input line 166.
+ input line 167.
 (pdftex.def)             Requested size: 308.6555pt x 148.7569pt.
 
 <../figures/lecture-welcome/SciLifeLab-logos.png, id=73, 839.135pt x 123.46124p
@@ -1110,7 +1110,7 @@ t>
 File: ../figures/lecture-welcome/SciLifeLab-logos.png Graphic file (type png)
  <use ../figures/lecture-welcome/SciLifeLab-logos.png>
 Package pdftex.def Info: ../figures/lecture-welcome/SciLifeLab-logos.png used o
-n input line 166.
+n input line 167.
 (pdftex.def)             Requested size: 251.74243pt x 37.03865pt.
  [6
 
@@ -1121,7 +1121,7 @@ ciLifeLab-logos.png>]
 File: ../figures/lecture-welcome/table-cartoon.png Graphic file (type png)
  <use ../figures/lecture-welcome/table-cartoon.png>
 Package pdftex.def Info: ../figures/lecture-welcome/table-cartoon.png used on i
-nput line 176.
+nput line 177.
 (pdftex.def)             Requested size: 214.79869pt x 185.08821pt.
  [7
 
@@ -1135,14 +1135,14 @@ nput line 176.
 \tf@snm=\write8
 \openout8 = `welcome.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 634.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 634.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 635.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 635.
  (./welcome.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 634.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 634.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 635.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 635.
 Package rerunfilecheck Info: File `welcome.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 634.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 635.
  ) 
 Here is how much of TeX's memory you used:
  17786 strings out of 493089
@@ -1167,7 +1167,7 @@ en referenced but does not exist, replaced by a fixed one
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/tex
 live/2015/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/20
 15/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on welcome.pdf (7 pages, 4193839 bytes).
+Output written on welcome.pdf (7 pages, 4193921 bytes).
 PDF statistics:
  108 PDF objects out of 1000 (max. 8388607)
  70 compressed objects within 1 object stream
