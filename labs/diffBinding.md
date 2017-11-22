@@ -149,6 +149,108 @@ save.image("diffBind.RData")
 
 ### Local version <a name="DB_local">
 
+Create a separate directory on your local computer where you would like to work and name it e.g. `diffBind`.
+
+To be able to run DiffBind locally, we will need to copy from Uppmax or Box a set of files, i.e. BAM files, BED files with called peaks regions as well as the sample sheet information file. Download these from ([see](../box)) or from Uppmax with _scp_ command:
+
+```bash
+
+scp -r <username>@milou.uppmax.uu.se:~/chipseq/data/bam/* .
+scp -r <username>@milou.uppmax.uu.se:~/chipseq/results/peaks_bed/* .
+scp -r <username>@milou.uppmax.uu.se:~/chipseq/home/olga/chipseq/analysis/R/samples_REST.txt .
+
+```
+
+You may want to place the downloaded files in the `diffBind` directory or at least keep a track of their location.Also we need to modify `samples_REST.txt` so the pathways are pointing to the BAM and BED files on your local computer. 
+
+Now, we can open R-Studio and set working directory to working folder e.g. `diffBind` folder by `Session -> Set Working Directory -> Choose Directory`. Now, all R commands will be in respect to this directory. 
+
+You can type commands directly in the Console window. A bit smarter way is to open a new R script under ??File -> New File -> R Script?? and type commands there, saving it from time to time. This way if you want to go back and repeat comamnds you can. To execute commands written in script, copy and paste commands to Console window and press Enter, press `Run` button in R-Studio or ask for a demo. 
+
+To use DiffBind package we need to install it first. To do so: 
+```bash
+
+source("https://bioconductor.org/biocLite.R")
+biocLite("DiffBind")
+
+```
+
+If the above worked, we should be able to load DiffBind library:
+```bash
+
+library(DiffBind)
+
+```
+
+We will now follow DiffBind example to obtain differentially bound sites, given our samples. You may want to open DiffBind tutorial and read section [3 Example: Obtaining differentially bound sites](http://bioconductor.org/packages/devel/bioc/vignettes/DiffBind/inst/doc/DiffBind.pdf) while typing the command to get more informatin about each step. 
+
+```bash
+
+# reading in the sample information (metadata)
+samples = read.csv("samples_REST.txt", sep="\t")
+
+#	inspecting the metadata
+samples
+
+#	creating an object containing data
+res=dba(sampleSheet=samples, config=data.frame(RunParallel=FALSE))
+
+# inspecting the object: how many peaks are identifed given the default settings?
+res
+
+# counting reads mapping to intervals (peaks)
+# at this step a normalisation is applied by the default set to: score=DBA_SCORE_TMM_MINUS_FULL
+res.cnt = dba.count(res, minOverlap=2, score=DBA_SCORE_TMM_MINUS_FULL, fragmentSize=130)
+
+# inspecting the object: notice the FRiP values! 
+res.cnt
+
+# plotting the correlation of libraries based on normalised counts of reads in peaks
+pdf("correlation_libraries_normalised.pdf")
+plot(res.cnt)
+dev.off()
+
+# PCA scores plot: data overview
+pdf("PCA_normalised_libraries.pdf")
+dba.plotPCA(res.cnt,DBA_TISSUE,label=DBA_TISSUE)
+dev.off()
+
+# setting the contrast: how many contrasts were set? 
+res.cnt2 = dba.contrast(res.cnt, categories=DBA_TISSUE, minMembers=2)
+
+# inspecting the object
+res.cnt2
+
+# performing analysis of differential binding
+# which condition are most alike, which are most different, is this in line with part one of the tutorial?
+res.cnt3 = dba.analyze(res.cnt2)
+res.cnt3
+
+# correlation heatmap  using only significantly differentially bound sites
+# choose the contrast of interest e.g. HeLa vs. neuronal (#1)
+pdf("correlation_HeLa_vs_neuronal.pdf")
+plot(res.cnt3, contrast=1)
+dev.off()
+
+# boxplots to view how read distributions differ between classes of binding sites
+# are reads distributed evenly between those that increase binding affinity HeLa vs. in neuronal?
+pdf("Boxplot_HeLa_vs_neuronal.pdf")
+pvals <- dba.plotBox(res.cnt3, contrast=1)
+dev.off()
+
+# extrating differentially bidning sites in GRanges
+res.db1 = dba.report(res.cnt3, contrast=1)
+head(rest.db1)
+
+# plotting overlaps of sites bound by REST in different cell types
+pdf("binding_site_overlap_sknsh.pdf")
+dba.plotVenn(res.cnt3, 1:4, label1="HeLa",label2="neuron",label3="HepG2",label4="sknsh")
+dev.off()
+
+# finally, let's save our R session including the generated data. We will need everything in the next section
+save.image("diffBind.RData")
+```
+
 ## Functional analysis <a name="FA">
 
 So now we have list of differentially bound sites for comparisons of interest but we do not know much about them beside the genomic location. It is time to find out more. To do so, in this section we will uuse another Bioconductor package, [ChIPpeakAnno](http://bioconductor.org/packages/release/bioc/vignettes/ChIPpeakAnno/inst/doc/pipeline.html). 
@@ -157,7 +259,7 @@ ChIPpeakAnno "is for facilitating the downstream analysis for ChIP-seq experimen
 
 Here, we will annotate differentialy bound sites, summarize the in a genomic feature context and obtain enriched GO terms and pathways. Note this part requires usage of annotation packages that are not all available on Uppmax. The Uppmax version contains only peaks annotations, whereas the local version contains GO and pathways analysis. 
 
-### Uppmax version <a name="FA_uppmax"
+### Uppmax version <a name="FA_uppmax">
 
 We will continue our R session. If you have logged-out or lost connection or simply want to start fresh: check pathways to R libraries and re-set if needed, navigate to R directory, load R packages, open R and load back the data saved in the differential bidning session. We will build on them. 
 

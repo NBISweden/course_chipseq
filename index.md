@@ -9,6 +9,8 @@ Held in SciLifeLab Solna, 2017-10-23 and 2017-10-14
 ## Important Links
 [Pre-course material](precourse)   
 [Schedule](schedule)  
+[Alternative Files Locations](box)  
+
 [Participants](participants.pdf)
 
 
