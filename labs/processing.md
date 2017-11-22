@@ -521,7 +521,7 @@ We will view and need the following HeLa replicate 1 files:
 and corresponding input files:
 * `~chipseq/data/bam/hela/ENCFF000PET.chr12.rmdup.sort.bam`
 * `~chipseq/data/bam/hela/ENCFF000PET.chr12.rmdup.sort.bam.bai`
-* `~chipseq/results/coverage/ENCFF000PEE.cov.norm1x.bedgraph`
+* `~chipseq/results/coverage/ENCFF000PET.cov.norm1x.bedgraph`
 
 Let's copy them to local computers, remember how? From your local terminal e.g.
 
@@ -543,9 +543,14 @@ Explore data
 To view the `peaks_hela.chr12.bed`
 
 ```bash
-head peaks_hela.chr12.bed (to view beginning of the file)
-tail peaks_hela.chr12.bed (to view end of the file)
-less peaks_hela.chr12.bed (to scroll-down the file)
+# to view beginning of the file
+head peaks_hela.chr12.bed 
+
+# to view end of the file
+tail peaks_hela.chr12.bed
+
+# to scroll-down the file
+less peaks_hela.chr12.bed 
 ```
 
 Exploration suggestions:

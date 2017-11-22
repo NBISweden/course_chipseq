@@ -137,7 +137,7 @@ dev.off()
 
 # extrating differentially bidning sites in GRanges
 res.db1 = dba.report(res.cnt3, contrast=1)
-head(rest.db1)
+head(res.db1)
 
 # plotting overlaps of sites bound by REST in different cell types
 pdf("binding_site_overlap.pdf")
@@ -158,7 +158,7 @@ To be able to run DiffBind locally, we will need to copy from Uppmax or Box a se
 
 scp -r <username>@milou.uppmax.uu.se:~/chipseq/data/bam/* .
 scp -r <username>@milou.uppmax.uu.se:~/chipseq/results/peaks_bed/* .
-scp -r <username>@milou.uppmax.uu.se:~/chipseq/home/olga/chipseq/analysis/R/samples_REST.txt .
+scp -r <username>@milou.uppmax.uu.se:~/chipseq/analysis/R/samples_REST.txt .
 
 ```
 
@@ -241,7 +241,7 @@ dev.off()
 
 # extrating differentially bidning sites in GRanges
 res.db1 = dba.report(res.cnt3, contrast=1)
-head(rest.db1)
+head(res.db1)
 
 # plotting overlaps of sites bound by REST in different cell types
 pdf("binding_site_overlap.pdf")
@@ -290,7 +290,7 @@ library(ChIPpeakAnno)
 # Loading TSS Annotation For Human Sapiens (GRCh37) Obtained From BiomaRt
 data(TSS.human.GRCh37)
 
-# Peaking the peaks for the interesting comparison, e.g.
+# Choosing the peaks for the interesting comparison, e.g.
 data.peaks = dba.report(res.cnt3, contrast=1)
 head(data.peaks)
 
@@ -329,7 +329,7 @@ library(ChIPpeakAnno)
 # Loading TSS Annotation For Human Sapiens (GRCh37) Obtained From BiomaRt
 data(TSS.human.GRCh37)
 
-# Peaking the peaks for the interesting comparison, e.g.
+# Choosing the peaks for the interesting comparison, e.g.
 data.peaks = dba.report(res.cnt3, contrast=1)
 head(data.peaks)
 
