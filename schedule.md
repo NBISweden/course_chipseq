@@ -7,6 +7,7 @@ Course is held at SciLifeLab, Tomtebodavagen 23A, 171 65 Solna
 
 Contact: [olga.dethlefsen@nbis.se](olga.dethlefsen@gmail.com); 0720 492 082
 
+----
 
 ### Thursday 2017-10-23
 
@@ -26,6 +27,7 @@ Room: Gamma 6, Pascal
 
 **16.15 - 17.00** Group discussion: ChIP-seq data processing (Olga, Verena)
 
+----
 
 ### Friday 2017-10-24
 
@@ -45,7 +47,7 @@ Room: Gamma 6, Pascal
 
 **16.00 - 17.00** Wrap-up (Olga, Agata, Jakub, Verena)
 
-
+----
 
 _coffee and snacks will arrive twice a day_
 

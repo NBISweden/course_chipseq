@@ -398,17 +398,13 @@ Feel free to build more on the exercises. Follow the [ChIPpeakAnno tutorial](htt
 
 ## Concluding remarks and next steps <a name="Next">
 
+The workflow presented in the tutorials is quite common and it includes recommended steps for analysis of ChIP-seq data. Naturally, there may be different tools or ways to preform similar tasks. New tools are being developed all the time and no single tool can do it all. 
 
-The workflow presented in this exercise is similar to a typical one used for analysis of ChIP-seq data. There are more types of analyses you can do, which were not discussed here. One typical task is to identify short sequence motifs enriched in the regions bound by the assayed factor (peaks). There are several tools available, and I recommend testing at least two tools for your data.
+In the extra labs we have prepared you can find for instance an alternative way of quality control of ChIP-seq data with R package called ChIPQC as well as alternative differential binding workflow with a packaged called csaw. Note, these labs were not extensively tested so you may need to experiment and draw from the knowledge gained in the main labs. 
 
-[Homer](http://homer.salk.edu/homer/)
+Also, there are more types of analyses one can do beyond the one presented here. A common further analysis, for instance, includes identification of short sequence motifs enriched in regions bound by the assayed factor (peaks). There are several tools available here and we recommend you test one or two with on the tutorial data: [Homer](http://homer.salk.edu/homer/), [GEM](http://groups.csail.mit.edu/cgs/gem/), [RSAT](http://floresta.eead.csic.es/rsat/peak-motifs_form.cgi)m [MEME](http://meme-suite.org/)
 
-[GEM](http://groups.csail.mit.edu/cgs/gem/)
-
-[RSAT](http://floresta.eead.csic.es/rsat/peak-motifs_form.cgi)
-
-[MEME](http://meme-suite.org/)
-
+Above all, we recommend that you keep trying to analyze your own data. Practice makes perfect :)
 
 ## Appendix: figures <a name="Appendix">
 
