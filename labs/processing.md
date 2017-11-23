@@ -513,15 +513,15 @@ So what do you think?
 In this part we will look more closely at our data. This could be done in principle on Uppmax using installed tools but it is so much easier to work with genome browser locally. If you have not done this before the course install Interactive Genome Browser [IGV](https://www.broadinstitute.org/igv/).
 
 We will view and need the following HeLa replicate 1 files:
-* `~chipseq/data/bam/hela/ENCFF000PED.chr12.rmdup.sort.bam`: mapped reads
-* `~chipseq/data/bam/hela/ENCFF000PED.chr12.rmdup.sort.bam.bai` : mapped reads index file
-* `~chipseq/results/coverage/ENCFF000PED.cov.norm1x.bedgraph` : coverage track
-* `~chipseq/results/peaks_macs/hela_1_REST.chr12.macs2_peaks.narrowPeak` : peaks called
+* `~/chipseq/data/bam/hela/ENCFF000PED.chr12.rmdup.sort.bam`: mapped reads
+* `~/chipseq/data/bam/hela/ENCFF000PED.chr12.rmdup.sort.bam.bai` : mapped reads index file
+* `~/chipseq/results/coverage/ENCFF000PED.cov.norm1x.bedgraph` : coverage track
+* `~/chipseq/results/peaks_macs/hela_1_REST.chr12.macs2_peaks.narrowPeak` : peaks called
 
 and corresponding input files:
-* `~chipseq/data/bam/hela/ENCFF000PET.chr12.rmdup.sort.bam`
-* `~chipseq/data/bam/hela/ENCFF000PET.chr12.rmdup.sort.bam.bai`
-* `~chipseq/results/coverage/ENCFF000PET.cov.norm1x.bedgraph`
+* `~/chipseq/data/bam/hela/ENCFF000PET.chr12.rmdup.sort.bam`
+* `~/chipseq/data/bam/hela/ENCFF000PET.chr12.rmdup.sort.bam.bai`
+* `~/chipseq/results/coverage/ENCFF000PET.cov.norm1x.bedgraph`
 
 Let's copy them to local computers, remember how? From your local terminal e.g.
 

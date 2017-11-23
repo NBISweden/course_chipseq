@@ -423,7 +423,7 @@ Fig: PCA scores plot: data overview using normalised counts of reads in peaks
 ![Heatmap](../figures/lab-diffBinding/correlation_HeLa_vs_neuronal.pdf)
 
 Fig: Correlation heatmap  using only significantly differentially bound sites for HeLa and neuronal
-# choose the contrast of interest e.g. HeLa vs. neuronal (#1)
+
 
 ----
 

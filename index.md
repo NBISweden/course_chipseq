@@ -21,7 +21,8 @@ Held in SciLifeLab Solna, 2017-10-23 and 2017-10-24
 
 *Extras* (not extensively tested)
 * [Lab: csaw](labs/csaw) (locally)
-* [Lab: ChIPQC](labs/chipqc) (Uppmax or locally) (to be uploaded)
+* [Lab: ChIPQC](labs/chipqc) (Uppmax or locally)
+* [Lab: deepTools visualisation](labs/vis) (Uppmax)
 
 ## Address and travel suggestions
 [Travel Info](travel)  
