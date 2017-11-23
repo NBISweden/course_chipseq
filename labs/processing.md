@@ -74,7 +74,7 @@ We have booked half a node on Milou per course participant. To run the tutorial 
 
 ```bash
 ssh -Y username@milou.uppmax.uu.se
-interactive -A g2017022 --reservation=g2017022_THU 
+interactive -A g2017022 -p core -n 4 --reservation=g2017022_THU 
 ```
 
 Check which node you were assigned
@@ -422,8 +422,8 @@ wc -l peaks_hela.chr12.bed
 This way one can compare peaks from replicates of the same condition and beyond, that is peaks present in different conditions. For the latter, we need to create files with peaks common to replicates for the cell types to be able to compare. For instance, to inspect reproducible peaks between HeLa and HepG2 we need run: 
 
 ```bash
-bedtools intersect -a hela_1_peaks.chr12.bed -b hela_2_peaks.chr12.bed -f 0.50 -r \
-> peaks_hela.chr12.bed
+bedtools intersect -a hepg2_1_peaks.chr12.bed -b hepg2_2_peaks.chr12.bed -f 0.50 -r \
+> peaks_hepg2.chr12.bed
 
 bedtools intersect -a peaks_hepg2.chr12.bed -b peaks_hela.chr12.bed -f 0.50 -r \
 > peaks_hepg2_hela.chr12.bed

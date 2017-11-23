@@ -30,7 +30,7 @@ If you are choosing to run scripts on Uppmax, the setting-up is the same as for 
 ```bash
 
 ssh -Y <username>@milou.uppmax.uu.se
-interactive -A g2017022 --res=g2017022_FRI
+interactive -A g2017022 -p core -n 4 --reservation=g2017022_FRI 
 source ~/chipseq_env.sh	
 
 ```
