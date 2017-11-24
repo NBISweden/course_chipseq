@@ -306,9 +306,17 @@ write.table(data.peaksAnno, file="peaks_HeLa_vs_neuronal.txt", sep="\t", row.nam
 
 ### Local version <a name="FA_local">
 
-We will continue our R-Studio session. If you have logged-out or lost connection or simply want to start fresh follow setting up instructions for running DiffBind locally. We will also need to load DiffBind results saved in the differential binding session. We will build on them. 
+We will continue our R-Studio session. If you have logged-out or lost connection or simply want to start fresh follow setting up instructions for running DiffBind locally. 
 
+To install ChIPpeakAnno
+```bash
 
+source("https://bioconductor.org/biocLite.R")
+biocLite("ChIPpeakAnno")
+
+```
+
+We will also need to load DiffBind results saved in the differential binding session. We will build on them. 
 ```bash
 
 load("diffBind.RData") 
