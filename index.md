@@ -24,6 +24,14 @@ Held in SciLifeLab Solna, 2017-10-23 and 2017-10-24
 * [Lab: ChIPQC](labs/chipqc) (Uppmax or locally)
 * [Lab: deepTools visualisation](labs/vis) (Uppmax)
 
+
+*Day 2* 
+* [Differential occupancy with DiffBind](labs/diffBinding) + section [6.2 Deriving consensus peaksets](http://bioconductor.org/packages/devel/bioc/vignettes/DiffBind/inst/doc/DiffBind.pdf)
+* [Down-stream analysis with ChIPpeakAnno](labs/diffBinding) + selected [extras from  ChIPpeakAnno manual](https://bioconductor.org/packages/devel/bioc/vignettes/ChIPpeakAnno/inst/doc/ChIPpeakAnno.html)
+* [Lab: csaw](labs/csaw)
+* [Lab: deepTools visualisation](labs/vis) (Uppmax)
+
+
 ## Address and travel suggestions
 [Travel Info](travel)  
 
