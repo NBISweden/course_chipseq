@@ -39,7 +39,7 @@ Room: Gamma 6, Pascal
 
 **12.00 - 13.00** _lunch_
 
-**13.00 - 14.00** Introduction to SciLifeLab NGI ChIP-seq pipeline (Phil Ewels)
+**13.00 - 14.00** [Introduction to SciLifeLab NGI ChIP-seq pipeline](lectures/Phil Ewels - NBIS ChIP-seq course.pdf) (Phil Ewels)
 
 **14.00 - 15.00** [Practicals: down-stream analysis](labs/diffBinding) and optional [extras](index) (Olga, Agata, Jakub, Verena)
 
